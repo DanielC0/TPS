@@ -1,5 +1,6 @@
 package views;
 
+import java.awt.Graphics;
 import java.sql.Statement;
 
 /** 
@@ -140,7 +141,19 @@ public class Window extends javax.swing.JFrame {
                 .addComponent(panelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-
+        
+        final boolean showTabsHeader = false;
+        panelWindow.setUI(new javax.swing.plaf.metal.MetalTabbedPaneUI(){
+	        @Override
+	        protected int calculateTabAreaHeight(int tabPlacement, int horizRunCount, int maxTabHeight) {
+	            if (showTabsHeader) {
+	                return super.calculateTabAreaHeight(tabPlacement, horizRunCount, maxTabHeight);
+	            } else {
+	                return 0;
+	            }
+	        }
+	      protected void paintTabArea(Graphics g,int tabPlacement,int selectedIndex){}
+	    });
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
