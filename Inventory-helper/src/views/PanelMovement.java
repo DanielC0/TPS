@@ -139,7 +139,26 @@ public class PanelMovement extends javax.swing.JPanel {
     private void btnSeeDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeDetailsActionPerformed
         // TODO add your handling code here:
         
+        /*
+        in = entrada (cuando compro)
+        out = salida (cuando vendo)
         
+        extin=entrada externa
+        extout=salida externa
+        
+        credit=creditos
+        
+        if(tipo_de_movimiento_seleccionado == "in" || tipo_de_movimiento_seleccionado == "out"){
+        
+            DealingsDetails dealingDetails = new DealingsDetails();
+            dealingDetails.setVisible(true);  
+        }else if (tipo_de_movimiento_seleccionado == "extin" || tipo_de_movimiento_seleccionado == "extout"){
+            ExternalPaymentDetails exDetails = new ExternalPaymentDetails();
+            exDetails.setVisible(true);  
+        }
+        */
+        ExternalPaymentDetails exDetails = new ExternalPaymentDetails();
+        exDetails.setVisible(true);         
     }//GEN-LAST:event_btnSeeDetailsActionPerformed
      
 
