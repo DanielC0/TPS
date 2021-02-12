@@ -2,6 +2,10 @@ package views;
 
 import java.awt.Graphics;
 
+import javax.swing.UIManager;
+
+import com.formdev.flatlaf.FlatLightLaf;
+
 /** 
  *
  * @author Daniel
@@ -299,7 +303,13 @@ public class Window extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+    	try {
+    	    UIManager.setLookAndFeel( new FlatLightLaf() );
+    	} catch( Exception ex ) {
+    	    System.err.println( "Failed to initialize LaF" );
+    	}
+
+    	
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Window().setVisible(true);

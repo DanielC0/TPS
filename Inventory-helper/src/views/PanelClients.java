@@ -5,6 +5,7 @@
  */
 package views;
  
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -187,4 +188,8 @@ public class PanelClients extends javax.swing.JPanel {
     private javax.swing.JScrollPane scrollPaneClients;
     private javax.swing.JTable tableClients;
     // End of variables declaration//GEN-END:variables
+    
+    public void upgradaData(JTable tb) {
+    	
+    }
 }
