@@ -5,6 +5,8 @@
  */
 package views;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Daniel
@@ -34,6 +36,7 @@ public class PanelCredits extends javax.swing.JPanel {
         btnAddCredit = new javax.swing.JButton();
         btnModifyCredit = new javax.swing.JButton();
         btnDeleteCredit = new javax.swing.JButton();
+        btnPay = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setMaximumSize(new java.awt.Dimension(1200, 400));
@@ -43,46 +46,46 @@ public class PanelCredits extends javax.swing.JPanel {
 
         tableCredits.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Cedula", "Nombre", "Teléfono", "Deuda"
+                "Cedula", "Nombre", "Teléfono", "Deuda", "Fecha"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -99,6 +102,7 @@ public class PanelCredits extends javax.swing.JPanel {
             tableCredits.getColumnModel().getColumn(1).setResizable(false);
             tableCredits.getColumnModel().getColumn(2).setResizable(false);
             tableCredits.getColumnModel().getColumn(3).setResizable(false);
+            tableCredits.getColumnModel().getColumn(4).setResizable(false);
         }
 
         add(scrollPaneCredits, java.awt.BorderLayout.CENTER);
@@ -129,6 +133,14 @@ public class PanelCredits extends javax.swing.JPanel {
         });
         panelButtons.add(btnDeleteCredit);
 
+        btnPay.setText("Abonar");
+        btnPay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPayActionPerformed(evt);
+            }
+        });
+        panelButtons.add(btnPay);
+
         add(panelButtons, java.awt.BorderLayout.LINE_END);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -147,11 +159,30 @@ public class PanelCredits extends javax.swing.JPanel {
         new AddCredit();
     }//GEN-LAST:event_btnAddCreditActionPerformed
 
+    private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
+        // TODO add your handling code here:
+        /*
+        if(hay un credito seleccionado == TRUE){
+            
+            PaysDetails pay = new PaysDetails();
+            pay.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Seleccione un credito");
+        }
+        */
+        
+        //Esto de abajo lo borras cuando hagas el condicional de arriba :v
+        JOptionPane.showMessageDialog(this, "Seleccione un credito");
+        PaysDetails pay = new PaysDetails();
+        pay.setVisible(true);
+    }//GEN-LAST:event_btnPayActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddCredit;
     private javax.swing.JButton btnDeleteCredit;
     private javax.swing.JButton btnModifyCredit;
+    private javax.swing.JButton btnPay;
     private javax.swing.JPanel panelButtons;
     private javax.swing.JScrollPane scrollPaneCredits;
     private javax.swing.JTable tableCredits;

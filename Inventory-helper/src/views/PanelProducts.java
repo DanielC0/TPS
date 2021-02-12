@@ -34,6 +34,7 @@ public class PanelProducts extends javax.swing.JPanel {
         btnRegisterProduct = new javax.swing.JButton();
         btnModifyProduct = new javax.swing.JButton();
         btnDeleteProduct = new javax.swing.JButton();
+        btnCategories = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setMaximumSize(new java.awt.Dimension(1200, 400));
@@ -132,6 +133,14 @@ public class PanelProducts extends javax.swing.JPanel {
         });
         panelButtons.add(btnDeleteProduct);
 
+        btnCategories.setText("Categorias");
+        btnCategories.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCategoriesActionPerformed(evt);
+            }
+        });
+        panelButtons.add(btnCategories);
+
         add(panelButtons, java.awt.BorderLayout.LINE_END);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -150,8 +159,15 @@ public class PanelProducts extends javax.swing.JPanel {
         new AddProduct();
     }//GEN-LAST:event_btnRegisterProductActionPerformed
 
+    private void btnCategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriesActionPerformed
+        // TODO add your handling code here:
+        CategoriesDetails category = new CategoriesDetails();
+        category.setVisible(true);
+    }//GEN-LAST:event_btnCategoriesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCategories;
     private javax.swing.JButton btnDeleteProduct;
     private javax.swing.JButton btnModifyProduct;
     private javax.swing.JButton btnRegisterProduct;

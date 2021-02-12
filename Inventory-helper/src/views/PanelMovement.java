@@ -27,7 +27,6 @@ public class PanelMovement extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel2 = new javax.swing.JPanel();
         scrollPaneDealings = new javax.swing.JScrollPane();
@@ -125,6 +124,11 @@ public class PanelMovement extends javax.swing.JPanel {
         panelButtons.add(btnSeeDetails);
 
         btnModifyMovement.setText("Modificar Movimiento");
+        btnModifyMovement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModifyMovementActionPerformed(evt);
+            }
+        });
         panelButtons.add(btnModifyMovement);
 
         btnRegisterMovement.setText("Registrar Movimiento");
@@ -160,6 +164,24 @@ public class PanelMovement extends javax.swing.JPanel {
         ExternalPaymentDetails exDetails = new ExternalPaymentDetails();
         exDetails.setVisible(true);         
     }//GEN-LAST:event_btnSeeDetailsActionPerformed
+
+    private void btnModifyMovementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyMovementActionPerformed
+        // TODO add your handling code here:
+        /*
+        in = entrada (cuando compro)
+        out = salida (cuando vendo)
+        
+        extin=entrada externa
+        extout=salida externa
+        
+        credit=creditos
+        */
+        /*
+        if(tipo_de_movimiento==" X "){
+            AbrirFrame datos de compra o ventas
+        }*/
+        
+    }//GEN-LAST:event_btnModifyMovementActionPerformed
      
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
