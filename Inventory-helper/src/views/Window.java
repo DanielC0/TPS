@@ -22,7 +22,7 @@ public class Window extends javax.swing.JFrame {
         initComponents();
         openHome(); 
         this.setLocationRelativeTo(null);
-        this.setResizable(false);
+        this.setResizable(true);
         //con.conectar();
     }
     
@@ -304,7 +304,9 @@ public class Window extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
     	try {
-    	    UIManager.setLookAndFeel( new FlatLightLaf() );
+//    	    UIManager.setLookAndFeel( new FlatLightLaf() );
+    	    UIManager.setLookAndFeel( new com.formdev.flatlaf.intellijthemes.FlatArcIJTheme() );
+    	    
     	} catch( Exception ex ) {
     	    System.err.println( "Failed to initialize LaF" );
     	}
