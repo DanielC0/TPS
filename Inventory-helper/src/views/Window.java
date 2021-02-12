@@ -36,7 +36,7 @@ public class Window extends javax.swing.JFrame {
         labelTitle = new javax.swing.JLabel();
         btnHome = new javax.swing.JButton();
         btnReports = new javax.swing.JButton();
-        btnDealings = new javax.swing.JButton();
+        btnMovements = new javax.swing.JButton();
         btnProducts = new javax.swing.JButton();
         brtnCredits = new javax.swing.JButton();
         btnClients = new javax.swing.JButton();
@@ -73,13 +73,13 @@ public class Window extends javax.swing.JFrame {
         });
         panelMenu.add(btnReports);
 
-        btnDealings.setText("DEALINGS");
-        btnDealings.addActionListener(new java.awt.event.ActionListener() {
+        btnMovements.setText("MOVEMENTS");
+        btnMovements.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDealingsActionPerformed(evt);
+                btnMovementsActionPerformed(evt);
             }
         });
-        panelMenu.add(btnDealings);
+        panelMenu.add(btnMovements);
 
         btnProducts.setText("PRODUCTS");
         btnProducts.addActionListener(new java.awt.event.ActionListener() {
@@ -193,6 +193,32 @@ public class Window extends javax.swing.JFrame {
         }
         vpCredits="1";
     }
+    views.PanelMovement panelDealings;
+    public String vpDealings="0";
+    public void openDealings(){ 
+        if(vpDealings=="0"){
+            panelDealings = new views.PanelMovement();
+            panelWindow.addTab("Transacciones", panelDealings);
+            panelWindow.setSelectedComponent(panelDealings);
+        }else{
+            panelWindow.setSelectedComponent(panelDealings);
+        }
+        vpDealings="1";
+    } 
+    
+    views.PanelSettings panelSettings;
+    public String vpSettings="0";
+    public void openSettings(){ 
+        if(vpSettings=="0"){
+            panelSettings = new views.PanelSettings();
+            panelWindow.addTab("Ajustes", panelSettings);
+            panelWindow.setSelectedComponent(panelSettings);
+        }else{
+            panelWindow.setSelectedComponent(panelSettings);
+        }
+        vpSettings="1";
+    }
+
     views.PanelReports panelReports;
     public String vpReports="0";
     public void openReports(){ 
@@ -204,30 +230,6 @@ public class Window extends javax.swing.JFrame {
             panelWindow.setSelectedComponent(panelReports);
         }
         vpReports="1";
-    }
-    views.PanelDealings panelDealings;
-    public String vpDealings="0";
-    public void openDealings(){ 
-        if(vpDealings=="0"){
-            panelDealings = new views.PanelDealings();
-            panelWindow.addTab("Transacciones", panelDealings);
-            panelWindow.setSelectedComponent(panelDealings);
-        }else{
-            panelWindow.setSelectedComponent(panelDealings);
-        }
-        vpDealings="1";
-    } 
-    views.PanelSettings panelSettings;
-    public String vpSettings="0";
-    public void openSettings(){ 
-        if(vpReports=="0"){
-            panelSettings = new views.PanelSettings();
-            panelWindow.addTab("Ajustes", panelSettings);
-            panelWindow.setSelectedComponent(panelSettings);
-        }else{
-            panelWindow.setSelectedComponent(panelSettings);
-        }
-        vpSettings="1";
     }
     
     
@@ -271,10 +273,10 @@ public class Window extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnExitMouseClicked
 
-    private void btnDealingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDealingsActionPerformed
+    private void btnMovementsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovementsActionPerformed
         // TODO add your handling code here:
         openDealings();
-    }//GEN-LAST:event_btnDealingsActionPerformed
+    }//GEN-LAST:event_btnMovementsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,9 +293,9 @@ public class Window extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton brtnCredits;
     private javax.swing.JButton btnClients;
-    private javax.swing.JButton btnDealings;
     private javax.swing.JLabel btnExit;
     private javax.swing.JButton btnHome;
+    private javax.swing.JButton btnMovements;
     private javax.swing.JButton btnProducts;
     private javax.swing.JButton btnReports;
     private javax.swing.JButton btnSettings;

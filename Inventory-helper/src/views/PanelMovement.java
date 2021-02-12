@@ -4,17 +4,17 @@
  * and open the template in the editor.
  */
 package views;
-
+ 
 /**
  *
  * @author Daniel
  */
-public class PanelDealings extends javax.swing.JPanel {
+public class PanelMovement extends javax.swing.JPanel {
 
     /**
      * Creates new form panelInicio
      */
-    public PanelDealings() {
+    public PanelMovement() {
         initComponents();
         
     }
@@ -27,18 +27,24 @@ public class PanelDealings extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel2 = new javax.swing.JPanel();
         scrollPaneDealings = new javax.swing.JScrollPane();
         tableDealings = new javax.swing.JTable();
+        panelButtons = new javax.swing.JPanel();
+        btnSeeDetails = new javax.swing.JButton();
+        btnModifyMovement = new javax.swing.JButton();
+        btnRegisterMovement = new javax.swing.JButton();
+        btnDeleteMovement = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setMaximumSize(new java.awt.Dimension(1200, 400));
         setMinimumSize(new java.awt.Dimension(2, 4));
         setPreferredSize(new java.awt.Dimension(600, 200));
-        setLayout(new java.awt.GridLayout(1, 0));
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
 
         tableDealings.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,7 +84,7 @@ public class PanelDealings extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Nombre", "Cantidad", "Valor", "Tipo de movimiento"
+                "ID", "Tipo", "Valor", "Fecha"
             }
         ) {
             Class[] types = new Class [] {
@@ -107,11 +113,43 @@ public class PanelDealings extends javax.swing.JPanel {
         jPanel2.add(scrollPaneDealings);
 
         add(jPanel2);
+
+        panelButtons.setLayout(new javax.swing.BoxLayout(panelButtons, javax.swing.BoxLayout.PAGE_AXIS));
+
+        btnSeeDetails.setText("Detallar Movimiento");
+        btnSeeDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeeDetailsActionPerformed(evt);
+            }
+        });
+        panelButtons.add(btnSeeDetails);
+
+        btnModifyMovement.setText("Modificar Movimiento");
+        panelButtons.add(btnModifyMovement);
+
+        btnRegisterMovement.setText("Registrar Movimiento");
+        panelButtons.add(btnRegisterMovement);
+
+        btnDeleteMovement.setText("Eliminar Movimiento");
+        panelButtons.add(btnDeleteMovement);
+
+        add(panelButtons);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSeeDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeDetailsActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_btnSeeDetailsActionPerformed
+     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDeleteMovement;
+    private javax.swing.JButton btnModifyMovement;
+    private javax.swing.JButton btnRegisterMovement;
+    private javax.swing.JButton btnSeeDetails;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel panelButtons;
     private javax.swing.JScrollPane scrollPaneDealings;
     private javax.swing.JTable tableDealings;
     // End of variables declaration//GEN-END:variables

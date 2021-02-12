@@ -39,7 +39,7 @@ public class PanelSettings extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(2, 4));
         setPreferredSize(new java.awt.Dimension(600, 200));
 
-        labelPass.setText("Cambiar contraseña:");
+        labelPass.setText("Cambiar contrasena:");
 
         txtPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
