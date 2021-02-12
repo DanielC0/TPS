@@ -219,8 +219,9 @@ public class Window extends javax.swing.JFrame {
     } 
     views.PanelSettings panelSettings;
     public String vpSettings="0";
+    
     public void openSettings(){ 
-        if(vpReports=="0"){
+        if(vpSettings=="0"){
             panelSettings = new views.PanelSettings();
             panelWindow.addTab("Ajustes", panelSettings);
             panelWindow.setSelectedComponent(panelSettings);
