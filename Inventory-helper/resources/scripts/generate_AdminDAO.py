@@ -13,7 +13,7 @@ def load_file():
 "import java.util.logging.Level;\n" + \
 "import java.util.logging.Logger;\n" + \
 "\n" + \
-"import DAOS.Conexion;\n" + \
+#"import DAOS.conexion;\n" + \
 "\n" + \
 "public class AdminDAO {\n" + \
 "	\n" + \
@@ -40,7 +40,7 @@ def load_file():
 "\n" + \
 "		} catch (ClassNotFoundException ex) {\n" + \
 "			System.out.println(\"error de clase : \"+ex);\n" + \
-"			Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);\n" + \
+"			Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);\n" + \
 "		}\n" + \
 "		\n" + \
 "		return conexion;\n" + \

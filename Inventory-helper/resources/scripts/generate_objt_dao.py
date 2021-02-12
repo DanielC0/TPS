@@ -29,17 +29,23 @@ def load_file():
     # parse to java types
     type_by_java = {
             "VARCHAR":"String",
+            "STRING":"String",
             "TEXT": "String",
             "INTEGER": "int",
             "NUMBER": "double",
+            "DOUBLE": "double",
             "DATE":"Date",
+            "DATETIME":"Date",
     }
     type_by_java_S ={
             "VARCHAR":"String",
+            "STRING":"String",
             "TEXT": "String",
             "INTEGER": "Int",
             "NUMBER": "Double",
+            "DOUBLE": "double",
             "DATE":"Date",
+            "DATETIME":"Date",
             }
     # generate the uper case and s
     classnameUse = classname.capitalize()  
