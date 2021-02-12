@@ -9,14 +9,15 @@ package views;
  *
  * @author Daniel
  */
-public class DealingsDetails extends javax.swing.JFrame {
+public class ExternalPaymentDetails extends javax.swing.JFrame {
 
     /**
      * Creates new form DealingsDetails
      */
-    public DealingsDetails() {
+    public ExternalPaymentDetails() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -29,8 +30,8 @@ public class DealingsDetails extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        scrollPaneDealings = new javax.swing.JScrollPane();
-        tableDealings = new javax.swing.JTable();
+        scrollPaneExtPaymnts = new javax.swing.JScrollPane();
+        tableExtPaymnts = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         btnClose = new javax.swing.JButton();
 
@@ -39,22 +40,22 @@ public class DealingsDetails extends javax.swing.JFrame {
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
 
-        tableDealings.setModel(new javax.swing.table.DefaultTableModel(
+        tableExtPaymnts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Producto", "Cantidad", "Precio unitario", "Fecha"
+                "ID", "Descripcion", "Precio", "Fecha"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -65,16 +66,15 @@ public class DealingsDetails extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        scrollPaneDealings.setViewportView(tableDealings);
-        if (tableDealings.getColumnModel().getColumnCount() > 0) {
-            tableDealings.getColumnModel().getColumn(0).setResizable(false);
-            tableDealings.getColumnModel().getColumn(1).setResizable(false);
-            tableDealings.getColumnModel().getColumn(2).setResizable(false);
-            tableDealings.getColumnModel().getColumn(3).setResizable(false);
-            tableDealings.getColumnModel().getColumn(4).setResizable(false);
+        scrollPaneExtPaymnts.setViewportView(tableExtPaymnts);
+        if (tableExtPaymnts.getColumnModel().getColumnCount() > 0) {
+            tableExtPaymnts.getColumnModel().getColumn(0).setResizable(false);
+            tableExtPaymnts.getColumnModel().getColumn(1).setResizable(false);
+            tableExtPaymnts.getColumnModel().getColumn(2).setResizable(false);
+            tableExtPaymnts.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        jPanel1.add(scrollPaneDealings);
+        jPanel1.add(scrollPaneExtPaymnts);
 
         btnClose.setText("CERRAR");
         btnClose.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +97,7 @@ public class DealingsDetails extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnClose)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2);
@@ -129,20 +129,21 @@ public class DealingsDetails extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DealingsDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExternalPaymentDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DealingsDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExternalPaymentDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DealingsDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExternalPaymentDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DealingsDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExternalPaymentDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DealingsDetails().setVisible(true);
+                new ExternalPaymentDetails().setVisible(true);
             }
         });
     }
@@ -151,7 +152,7 @@ public class DealingsDetails extends javax.swing.JFrame {
     private javax.swing.JButton btnClose;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane scrollPaneDealings;
-    private javax.swing.JTable tableDealings;
+    private javax.swing.JScrollPane scrollPaneExtPaymnts;
+    private javax.swing.JTable tableExtPaymnts;
     // End of variables declaration//GEN-END:variables
 }
