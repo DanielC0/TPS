@@ -16,11 +16,11 @@ public class External_paymentDAO {
 			//get connection
 			conn = AdminDAO.getConnection();
 			PreparedStatement prest = conn.prepareStatement(
-				 "INSERT INTO external_payment (id, description, price_total, movement) VALUES (?, ?, ?, ?) ");
-			prest.setInt(1, obj.getId());
-			prest.setString(2, obj.getDescription());
-			prest.setDouble(3, obj.getPrice_total());
-			prest.setInt(4, obj.getMovement());
+				 "INSERT INTO external_payment (description, price_total, movement) VALUES ( ?, ?, ?) ");
+//			prest.setInt(1, obj.getId());
+			prest.setString(1, obj.getDescription());
+			prest.setDouble(2, obj.getPrice_total());
+			prest.setInt(3, obj.getMovement());
 
 			if(prest.executeUpdate() > 0) {
 				System.out.println("external_payment register successfully");			}
@@ -55,7 +55,10 @@ public class External_paymentDAO {
 		}
 		return allobjts;
 	}
-
+	public static ArrayList<External_payment> read(){
+		return External_paymentDAO.read("");
+	}
+	
 	/*UPDATE*/
 	public static int update(External_payment obj){
 		Connection conn = null;

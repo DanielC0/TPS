@@ -16,10 +16,10 @@ public class CategoryDAO {
 			//get connection
 			conn = AdminDAO.getConnection();
 			PreparedStatement prest = conn.prepareStatement(
-				 "INSERT INTO category (id, name, description) VALUES (?, ?, ?) ");
-			prest.setInt(1, obj.getId());
-			prest.setString(2, obj.getName());
-			prest.setString(3, obj.getDescription());
+				 "INSERT INTO category ( name, description) VALUES ( ?, ?) ");
+//			prest.setInt(1, obj.getId());
+			prest.setString(1, obj.getName());
+			prest.setString(2, obj.getDescription());
 
 			if(prest.executeUpdate() > 0) {
 				System.out.println("category register successfully");			}
@@ -53,6 +53,9 @@ public class CategoryDAO {
 			e.printStackTrace();
 		}
 		return allobjts;
+	}
+	public static ArrayList<Category> read(){
+		return CategoryDAO.read("");
 	}
 
 	/*UPDATE*/
@@ -94,4 +97,5 @@ public class CategoryDAO {
 
 		return re;
 	}
+	
 }

@@ -1,6 +1,5 @@
-CREATE TABLE category  (
+CREATE TABLE passwrd  (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name STRING ( 1 , 50 ) NOT NULL,
-  description STRING ( 1 , 50 )
+  wordkey STRING
   
 );

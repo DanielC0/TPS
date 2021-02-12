@@ -1,6 +1,7 @@
 package objs;
-import java.util.ArrayList; 
-/*CREATE TABLE payment  (
+import java.util.ArrayList;
+import java.util.Date; 
+/*CCREATE TABLE payment  (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   credit INTEGER NOT NULL,
   moment DATETIME NOT NULL,

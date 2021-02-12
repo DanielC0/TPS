@@ -3,9 +3,9 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class AdminDAO {
+public class Conexion {
 	
-	private static String url = "resources/database/InventoryHelperDB.db";
+	private static String url = "resources/database/InventoryHelperDBs.db";
 	private static Connection connect = null;
 	
 	/***
@@ -14,7 +14,7 @@ public class AdminDAO {
 	 */
 	public static Connection getConnection() {
 		try {
-			if (connect != null) {
+			if (connect == null) {
 				connect.close();
 			}
 			Class.forName("org.sqlite.JDBC");
@@ -42,8 +42,7 @@ public class AdminDAO {
 	}
 	
 	public static void main(String[] args) {
-		AdminDAO.getConnection();
+		Conexion.getConnection();
 	}
-	
-}
 
+}

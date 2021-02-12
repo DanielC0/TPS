@@ -16,12 +16,12 @@ public class DealingDAO {
 			//get connection
 			conn = AdminDAO.getConnection();
 			PreparedStatement prest = conn.prepareStatement(
-				 "INSERT INTO dealing (id, product, quantity, unit_price, movement) VALUES (?, ?, ?, ?, ?) ");
-			prest.setInt(1, obj.getId());
-			prest.setInt(2, obj.getProduct());
-			prest.setDouble(3, obj.getQuantity());
-			prest.setDouble(4, obj.getUnit_price());
-			prest.setInt(5, obj.getMovement());
+				 "INSERT INTO dealing ( product, quantity, unit_price, movement) VALUES ( ?, ?, ?, ?) ");
+//			prest.setInt(1, obj.getId());
+			prest.setInt(1, obj.getProduct());
+			prest.setDouble(2, obj.getQuantity());
+			prest.setDouble(3, obj.getUnit_price());
+			prest.setInt(4, obj.getMovement());
 
 			if(prest.executeUpdate() > 0) {
 				System.out.println("dealing register successfully");			}
@@ -56,7 +56,10 @@ public class DealingDAO {
 		}
 		return allobjts;
 	}
-
+	public static ArrayList<Dealing> read(){
+		return DealingDAO.read("");
+	}
+	
 	/*UPDATE*/
 	public static int update(Dealing obj){
 		Connection conn = null;
@@ -97,5 +100,9 @@ public class DealingDAO {
 		}
 
 		return re;
+	}
+	
+	public static void main(String[] args) {
+		
 	}
 }

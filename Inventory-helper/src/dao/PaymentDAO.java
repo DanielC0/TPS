@@ -16,11 +16,11 @@ public class PaymentDAO {
 			//get connection
 			conn = AdminDAO.getConnection();
 			PreparedStatement prest = conn.prepareStatement(
-				 "INSERT INTO payment (id, credit, moment, price) VALUES (?, ?, ?, ?) ");
-			prest.setInt(1, obj.getId());
-			prest.setInt(2, obj.getCredit());
-			prest.setDate(3, obj.getMoment());
-			prest.setDouble(4, obj.getPrice());
+				 "INSERT INTO payment ( credit, moment, price) VALUES ( ?, ?, ?) ");
+//			prest.setInt(1, obj.getId());
+			prest.setInt(1, obj.getCredit());
+			prest.setDate(2, tools.Utils.dateUtlToSql( obj.getMoment()));
+			prest.setDouble(3, obj.getPrice());
 
 			if(prest.executeUpdate() > 0) {
 				System.out.println("payment register successfully");			}
@@ -47,7 +47,7 @@ public class PaymentDAO {
 
 			allobjts= new ArrayList<Payment>();
 			while (rs.next()) {
-				allobjts.add( new Payment(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getDouble(4)));
+				allobjts.add( new Payment(rs.getInt(1), rs.getInt(2), tools.Utils.dateSqlToUtl( rs.getDate(3)), rs.getDouble(4)));
 			}
 		} catch (Exception e) {
 			System.out.println("error to select into payment " + e);
@@ -65,7 +65,7 @@ public class PaymentDAO {
 			PreparedStatement prepatest = conn.prepareStatement("UPDATE payment SET credit=?, moment=?, price=? WHERE id=?");
 			prepatest.setInt(1,obj.getId());
 			prepatest.setInt(2,obj.getCredit());
-			prepatest.setDate(3,obj.getMoment());
+			prepatest.setDate(3,tools.Utils.dateUtlToSql( obj.getMoment()));
 			prepatest.setDouble(4,obj.getPrice());
 			registro = prepatest.executeUpdate();
 			if(registro > 0) {

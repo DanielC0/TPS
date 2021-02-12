@@ -16,14 +16,14 @@ public class ProductDAO {
 			//get connection
 			conn = AdminDAO.getConnection();
 			PreparedStatement prest = conn.prepareStatement(
-				 "INSERT INTO product (id, name, stock, description, cpp, price, category) VALUES (?, ?, ?, ?, ?, ?, ?) ");
-			prest.setInt(1, obj.getId());
-			prest.setString(2, obj.getName());
-			prest.setDouble(3, obj.getStock());
-			prest.setString(4, obj.getDescription());
-			prest.setDouble(5, obj.getCpp());
-			prest.setDouble(6, obj.getPrice());
-			prest.setInt(7, obj.getCategory());
+				 "INSERT INTO product ( name, stock, description, cpp, price, category) VALUES ( ?, ?, ?, ?, ?, ?) ");
+//			prest.setInt(1, obj.getId());
+			prest.setString(1, obj.getName());
+			prest.setDouble(2, obj.getStock());
+			prest.setString(3, obj.getDescription());
+			prest.setDouble(4, obj.getCpp());
+			prest.setDouble(5, obj.getPrice());
+			prest.setInt(6, obj.getCategory());
 
 			if(prest.executeUpdate() > 0) {
 				System.out.println("product register successfully");			}
@@ -57,6 +57,9 @@ public class ProductDAO {
 			e.printStackTrace();
 		}
 		return allobjts;
+	}
+	public static ArrayList<Product> read(){
+		return ProductDAO.read("");
 	}
 
 	/*UPDATE*/

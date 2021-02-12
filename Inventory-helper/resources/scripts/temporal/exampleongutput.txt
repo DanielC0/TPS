@@ -1,16 +1,9 @@
-
-def load_file():
-    
-
-
-    obj_outpt_file= open("AdminDAO.java", "w")
-
-    str_out = "package dao;\n" + \
+"package dao;\n" + \
 "\n" + \
 "import java.sql.Connection;\n" + \
 "import java.sql.DriverManager;\n" + \
 "\n" + \
-"public class AdminDAO {\n" + \
+"public class Conexion {\n" + \
 "	\n" + \
 "	private static String url = \"resources/database/InventoryHelperDBs.db\";\n" + \
 "	private static Connection connect = null;\n" + \
@@ -48,16 +41,9 @@ def load_file():
 "		}\n" + \
 "	}\n" + \
 "	\n" + \
+"	public static void main(String[] args) {\n" + \
+"		Conexion.getConnection();\n" + \
+"	}\n" + \
+"\n" + \
 "}\n" + \
-"\n" 
-
-
-    
-    obj_outpt_file.write(str_out)
-    obj_outpt_file.close()
-
-def main():
-    load_file()
-
-if __name__ == '__main__':
-    main()
+"\n" + \

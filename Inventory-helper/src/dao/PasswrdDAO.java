@@ -16,9 +16,9 @@ public class PasswrdDAO {
 			//get connection
 			conn = AdminDAO.getConnection();
 			PreparedStatement prest = conn.prepareStatement(
-				 "INSERT INTO passwrd (wordkwy) VALUES (?) ");
-			prest.setString(1, obj.getWordkwy());
-
+				 "INSERT INTO passwrd (wordkey) VALUES (?) ");
+//			prest.setInt(1, obj.getId());
+			prest.setString(1, obj.getWordkey());
 			if(prest.executeUpdate() > 0) {
 				System.out.println("passwrd register successfully");			}
 		} catch (Exception e) {
@@ -44,13 +44,16 @@ public class PasswrdDAO {
 
 			allobjts= new ArrayList<Passwrd>();
 			while (rs.next()) {
-				allobjts.add( new Passwrd(rs.getString(1)));
+				allobjts.add( new Passwrd(rs.getInt(1), rs.getString(2)));
 			}
 		} catch (Exception e) {
 			System.out.println("error to select into passwrd " + e);
 			e.printStackTrace();
 		}
 		return allobjts;
+	}
+	public static ArrayList<Passwrd> read(){
+		return PasswrdDAO.read("");
 	}
 
 	/*UPDATE*/
@@ -59,7 +62,9 @@ public class PasswrdDAO {
 		int registro =0;
 		try {
 			conn = AdminDAO.getConnection();
-			PreparedStatement prepatest = conn.prepareStatement("UPDATE passwrd SET 			prepatest.setString(1,obj.getWordkwy());
+			PreparedStatement prepatest = conn.prepareStatement("UPDATE passwrd SET wordkey=? WHERE id=?");
+			prepatest.setInt(1,obj.getId());
+			prepatest.setString(2,obj.getWordkey());
 			registro = prepatest.executeUpdate();
 			if(registro > 0) {
 				System.out.println(" passwrd update successfully");
@@ -78,7 +83,7 @@ public class PasswrdDAO {
 		int re=0;
 		try {
 			conn = AdminDAO.getConnection();
-			ResultSet rs = conn.createStatement().executeQuery("DELETE FROM passwrd WHERE wordkwy='" + obj.getWordkwy()+ "'" );
+			ResultSet rs = conn.createStatement().executeQuery("DELETE FROM passwrd WHERE id='" + obj.getId()+ "'" );
 			if (rs.next())
 				re = 1;
 
@@ -89,4 +94,5 @@ public class PasswrdDAO {
 
 		return re;
 	}
+	
 }

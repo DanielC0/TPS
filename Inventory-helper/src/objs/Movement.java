@@ -1,5 +1,6 @@
 package objs;
-import java.util.ArrayList; 
+import java.util.ArrayList;
+import java.util.Date; 
 /*CREATE TABLE movement  (
   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   kind STRING NOT NULL,

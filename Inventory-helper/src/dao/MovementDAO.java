@@ -16,11 +16,11 @@ public class MovementDAO {
 			//get connection
 			conn = AdminDAO.getConnection();
 			PreparedStatement prest = conn.prepareStatement(
-				 "INSERT INTO movement (id, kind, price_total, moment) VALUES (?, ?, ?, ?) ");
-			prest.setInt(1, obj.getId());
-			prest.setString(2, obj.getKind());
-			prest.setDouble(3, obj.getPrice_total());
-			prest.setDate(4, obj.getMoment());
+				 "INSERT INTO movement ( kind, price_total, moment) VALUES ( ?, ?, ?) ");
+//			prest.setInt(1, obj.getId());
+			prest.setString(1, obj.getKind());
+			prest.setDouble(2, obj.getPrice_total());
+			prest.setDate(3, tools.Utils.dateUtlToSql( obj.getMoment()));
 
 			if(prest.executeUpdate() > 0) {
 				System.out.println("movement register successfully");			}
@@ -47,13 +47,16 @@ public class MovementDAO {
 
 			allobjts= new ArrayList<Movement>();
 			while (rs.next()) {
-				allobjts.add( new Movement(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getDate(4)));
+				allobjts.add( new Movement(rs.getInt(1), rs.getString(2), rs.getDouble(3), tools.Utils.dateSqlToUtl(rs.getDate(4))) );
 			}
 		} catch (Exception e) {
 			System.out.println("error to select into movement " + e);
 			e.printStackTrace();
 		}
 		return allobjts;
+	}
+	public static ArrayList<Movement> read(){
+		return MovementDAO.read("");
 	}
 
 	/*UPDATE*/
@@ -66,7 +69,7 @@ public class MovementDAO {
 			prepatest.setInt(1,obj.getId());
 			prepatest.setString(2,obj.getKind());
 			prepatest.setDouble(3,obj.getPrice_total());
-			prepatest.setDate(4,obj.getMoment());
+			prepatest.setDate(4,tools.Utils.dateUtlToSql( obj.getMoment()));
 			registro = prepatest.executeUpdate();
 			if(registro > 0) {
 				System.out.println(" movement update successfully");

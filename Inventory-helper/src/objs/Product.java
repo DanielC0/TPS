@@ -7,7 +7,7 @@ import java.util.ArrayList;
   description STRING ( 0 , 50 ),
   cpp DOUBLE NOT NULL,
   price DOUBLE NOT NULL,
-  category INTEGER
+  category INTEGER 
   
 );
 */

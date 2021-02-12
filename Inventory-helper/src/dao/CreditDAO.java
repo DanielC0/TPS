@@ -16,10 +16,10 @@ public class CreditDAO {
 			//get connection
 			conn = AdminDAO.getConnection();
 			PreparedStatement prest = conn.prepareStatement(
-				 "INSERT INTO credit (id, client, movement) VALUES (?, ?, ?) ");
-			prest.setInt(1, obj.getId());
-			prest.setInt(2, obj.getClient());
-			prest.setInt(3, obj.getMovement());
+				 "INSERT INTO credit (client, movement) VALUES ( ?, ?) ");
+//			prest.setInt(1, obj.getId());
+			prest.setInt(1, obj.getClient());
+			prest.setInt(2, obj.getMovement());
 
 			if(prest.executeUpdate() > 0) {
 				System.out.println("credit register successfully");			}
@@ -54,7 +54,9 @@ public class CreditDAO {
 		}
 		return allobjts;
 	}
-
+	public static ArrayList<Credit> read(){
+		return CreditDAO.read("");
+	}
 	/*UPDATE*/
 	public static int update(Credit obj){
 		Connection conn = null;
