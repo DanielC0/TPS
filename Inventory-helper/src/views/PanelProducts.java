@@ -321,7 +321,7 @@ public class PanelProducts extends javax.swing.JPanel {
 						try {
 							double cant = Double.valueOf(panelComp.txfNewQuantity.getText());
 							double precioT = Double.valueOf(panelComp.txfPuncharsePrice.getText());
-							
+							double precioU = Double.valueOf(panelComp.txfUnitPrice.getText());
 							Date fecha = panelComp.dCFechaCompra.getDate();
 							
 							// create movement and delai
@@ -331,12 +331,13 @@ public class PanelProducts extends javax.swing.JPanel {
 							// calculate CPP
 							double costoCPP = (prodGet.getCpp() * prodGet.getStock() +  precioT) / (prodGet.getStock() + cant);
 							// create dealing
-							DealingDAO.create(new Dealing(0, prodGet.getId(), cant, costoCPP, lastM));
+							DealingDAO.create(new Dealing(0, prodGet.getId(), cant, precioU, lastM));
 							
 							//update product
 							prodGet.setStock(prodGet.getStock() + cant); // change the stock value
 							prodGet.setCpp(costoCPP);
 							ProductDAO.update(prodGet);
+							this.getData();
 							break;
 							
 						} catch (Exception e) {
