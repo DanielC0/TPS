@@ -368,21 +368,7 @@ public class PanelHome extends javax.swing.JPanel {
 			e.printStackTrace();
 		}
 		
-		tableStock.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-			},
-			new String[] {
-				"Nombre", "cantidad", "Precio unitario"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Object.class, Object.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
+		tableStock.setModel(modeltb);
 		// change calls and sizes
 		
 		//WDefaultTableModel.setJTableColumnsWidth(tableStock, 800, 10,200,200,200,200,200,200,200);
