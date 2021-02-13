@@ -18,9 +18,9 @@ public class ClientDAO {
 			conn = AdminDAO.getConnection();
 			PreparedStatement prest = conn.prepareStatement(
 				 "INSERT INTO client (cc, name, phone, address) VALUES (?, ?, ?, ?) ");
-			prest.setInt(1, obj.getCc());
+			prest.setString(1, obj.getCc());
 			prest.setString(2, obj.getName());
-			prest.setInt(3, obj.getPhone());
+			prest.setString(3, obj.getPhone());
 			prest.setString(4, obj.getAddress());
 
 			if(prest.executeUpdate() > 0) {
@@ -48,7 +48,7 @@ public class ClientDAO {
 
 			allobjts= new ArrayList<Client>();
 			while (rs.next()) {
-				allobjts.add( new Client(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4)));
+				allobjts.add( new Client(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
 			}
 		} catch (Exception e) {
 			System.out.println("error to select into client " + e);
@@ -67,9 +67,9 @@ public class ClientDAO {
 		try {
 			conn = AdminDAO.getConnection();
 			PreparedStatement prepatest = conn.prepareStatement("UPDATE client SET name=?, phone=?, address=? WHERE cc=?");
-			prepatest.setInt(4,obj.getCc());
+			prepatest.setString(4,obj.getCc());
 			prepatest.setString(1,obj.getName());
-			prepatest.setInt(2,obj.getPhone());
+			prepatest.setString(2,obj.getPhone());
 			prepatest.setString(3,obj.getAddress());
 			registro = prepatest.executeUpdate();
 			if(registro > 0) {
@@ -90,7 +90,7 @@ public class ClientDAO {
 		try {
 			conn = AdminDAO.getConnection();
 			PreparedStatement pstm = conn.prepareStatement("DELETE FROM client WHERE cc= ? " );
-			pstm.setInt(1, obj.getCc());	
+			pstm.setString(1, obj.getCc());	
 			pstm.executeUpdate();
 			
 

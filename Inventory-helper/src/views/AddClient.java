@@ -5,6 +5,14 @@
  */
 package views;
 
+import java.awt.Color;
+
+import javax.swing.JOptionPane;
+
+import dao.AdminDAO;
+import dao.ClientDAO;
+import objs.Client;
+
 //import DAOS.clienteDAO;
 
 /**
@@ -132,23 +140,36 @@ public class AddClient extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    PanelClients pnl = new PanelClients();
+	
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        /*clienteDAO con = new clienteDAO();
-        con.conectar();
-        
-        int cedula = Integer.valueOf(txtCedula.getText());
-        String nombre = txtNombre.getText();
-        int telefono = Integer.valueOf(txtTelefono.getText());
-        String direccion = txtDireccion.getText();
-        
-        con.Crear(cedula, nombre, telefono, direccion);
-        */
+	    	  
+		    	if (tools.Utils.noempryString(txtName.getText(), 3) && tools.Utils.noempryString(txtCc.getText(), 3)) {
+					// start insert
+						ClientDAO.create(new Client(txtCc.getText(), txtName.getText(), txtPhone.getText(), txtAddress.getText()));
+						AdminDAO.closeConnection(); 
+						txtName.setText("");
+						txtCc.setText("");
+						txtPhone.setText("");
+						txtAddress.setText("");
+						//panel.getData();
+						JOptionPane.showMessageDialog(this, "Registrado con exito");
+						 
+				}else {
+					JOptionPane.showMessageDialog(null, "Los campos de nombre y cedula deben de estar diligenciado y con más de 3 caracteres, Registrelo otra vez ;)","No se ha podido guardar",JOptionPane.ERROR_MESSAGE);
+				
+				}
+		pnl.getData();
+    	 
         this.dispose();
+        
+       
     }//GEN-LAST:event_btnAddActionPerformed
 
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+   
+
+	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed

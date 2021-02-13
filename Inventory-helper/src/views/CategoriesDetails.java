@@ -328,7 +328,7 @@ public class CategoriesDetails extends javax.swing.JFrame {
 		// try get table values
 		int rwselect = jTableCats.getSelectedRow();
 		// exsit selection
-		if (rwselect >= 0) {
+		if (rwselect >= 0){
 			// generate the posible edit
 			JTextField txfName = new JTextField(7);
 			JTextArea txaDescr = new JTextArea();
@@ -336,7 +336,6 @@ public class CategoriesDetails extends javax.swing.JFrame {
 			int idCategory = (Integer) jTableCats.getValueAt(rwselect, 0);
 			txfName.setText(jTableCats.getValueAt(rwselect, 1).toString());
 			txaDescr.setText(jTableCats.getValueAt(rwselect, 2).toString());
-			
 			txaDescr.setColumns(20);
 			txaDescr.setRows(8);
 			JPanel containerC = new JPanel(), containerB = new JPanel(), containerF = new JPanel();

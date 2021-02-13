@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 import dao.AdminDAO;
 import objs.Category;
+import objs.Client;
 import uistyle.WDefaultTableModel;
 
 /**
@@ -28,12 +29,13 @@ public class PanelClients extends javax.swing.JPanel {
     public PanelClients() { 
         initComponents();
         
-        model = new DefaultTableModel();
+       /* model = new DefaultTableModel();
         model.addColumn("Cedula");
         model.addColumn("Nombre");
         model.addColumn("Telefono");
         model.addColumn("Direccion");
-        this.tableClients.setModel(model);
+        this.tableClients.setModel(model);*/
+        this.getData();
         
         /*clienteDAO con = new clienteDAO();
         con.conectar();
@@ -77,8 +79,9 @@ public class PanelClients extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(2, 4));
         setPreferredSize(new java.awt.Dimension(600, 200));
         setLayout(new java.awt.BorderLayout());
-
-        tableClients.setModel(new javax.swing.table.DefaultTableModel(
+        
+        /*
+         tableClients.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -130,6 +133,8 @@ public class PanelClients extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+          */
+        
         scrollPaneClients.setViewportView(tableClients);
         if (tableClients.getColumnModel().getColumnCount() > 0) {
             tableClients.getColumnModel().getColumn(0).setResizable(false);
@@ -183,7 +188,8 @@ public class PanelClients extends javax.swing.JPanel {
     private void btnAddClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddClientActionPerformed
         // TODO add your handling code here:
         
-        new AddClient();
+        new AddClient().pnl=this;
+        
     }//GEN-LAST:event_btnAddClientActionPerformed
 
 
@@ -196,5 +202,31 @@ public class PanelClients extends javax.swing.JPanel {
     private javax.swing.JTable tableClients;
     // End of variables declaration//GEN-END:variables
     
+<<<<<<< HEAD
+    //////////////////////////// BACKEND//////////////////////////////////
+    
+    public void getData() {
+		ArrayList<objs.Client> client =  dao.ClientDAO.read();
+		AdminDAO.closeConnection();
+		//load table model
+		WDefaultTableModel modeltb = new WDefaultTableModel(new String [] {"CC", "Nombre", "Telefono", "Direccion"});
+		// load clients
+		for (int i = 0; i < client.size(); i++) {
+			Client cliTemp = client.get(i);
+			modeltb.addRow(new Object[] {cliTemp.getCc(), cliTemp.getName(), cliTemp.getPhone(), cliTemp.getAddress()});
+		}
+		// change calls and sizes
+		tableClients.setModel(modeltb);/*
+		WDefaultTableModel.setJTableColumnsWidth(tableClients, 500, 100,200,200);
+		WDefaultTableModel.wrapCell(tableClients, 2);*/
+		
+	}
+    
+    
+    
+    
+    
+=======
+>>>>>>> d6ab632e29ec976ccd45277ef1e2143628ab3695
     
 }
