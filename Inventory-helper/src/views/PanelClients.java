@@ -202,6 +202,7 @@ public class PanelClients extends javax.swing.JPanel {
     private javax.swing.JTable tableClients;
     // End of variables declaration//GEN-END:variables
     
+<<<<<<< HEAD
     //////////////////////////// BACKEND//////////////////////////////////
     
     public void getData() {
@@ -225,5 +226,7 @@ public class PanelClients extends javax.swing.JPanel {
     
     
     
+=======
+>>>>>>> d6ab632e29ec976ccd45277ef1e2143628ab3695
     
 }

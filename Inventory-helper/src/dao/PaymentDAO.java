@@ -55,6 +55,9 @@ public class PaymentDAO {
 		}
 		return allobjts;
 	}
+	public static ArrayList<Payment> read(){
+		return read("");
+	}
 
 	/*UPDATE*/
 	public static int update(Payment obj){
