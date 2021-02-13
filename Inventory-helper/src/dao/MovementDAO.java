@@ -59,6 +59,7 @@ public class MovementDAO {
 		return MovementDAO.read("");
 	}
 	public static int readLastM(){
+		@SuppressWarnings("unused")
 		ArrayList<Movement> allobjts=null;
 		Connection conn = null;
 		try {

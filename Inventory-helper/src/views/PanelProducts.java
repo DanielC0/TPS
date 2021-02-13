@@ -243,10 +243,6 @@ public class PanelProducts extends javax.swing.JPanel {
 	 * Update the Product table 
 	 */
 	public void getData() {
-//		ArrayList<objs.Product> products = dao.ProductDAO.read();
-//		ArrayList<objs.Product> products = dao.ProductDAO.read("select ");
-//		select product.id, product.name, product.stock, product.description, product.cpp, product.price, product.category,
-//		category.name from product join category on product.category = category.id
 		
 		// lod table model
 		WDefaultTableModel modeltb = new WDefaultTableModel(
@@ -273,7 +269,7 @@ public class PanelProducts extends javax.swing.JPanel {
 		tableProducts.setModel(modeltb);
 		// change calls and sizes
 		
-		WDefaultTableModel.setJTableColumnsWidth(tableProducts, 800, 10,200,200,200,200,200,200,200);
+		WDefaultTableModel.setJTableColumnsWidth(tableProducts, 800, 10,200,200,200,200,200,10,200);
 //		WDefaultTableModel.wrapCell(tableProducts, 4);
 	}
 	
@@ -317,26 +313,40 @@ public class PanelProducts extends javax.swing.JPanel {
 				if(tools.Utils.noempryString(panelComp.txfPuncharsePrice.getText(), 1) &&
 						tools.Utils.noempryString(panelComp.txfNewQuantity.getText(), 1) &&
 						tools.Utils.noempryString(panelComp.txfUnitPrice.getText(), 1) &&
-						panelComp.dCFechaCompra.getDate() != null
+						panelComp.dCFechaCompra.getDate() != null 
 						) {
-					try {
-						double cant = Double.valueOf(panelComp.txfNewQuantity.getText());
-						double precioT = Double.valueOf(panelComp.txfPuncharsePrice.getText());
+					if(Double.valueOf( panelComp.txfPuncharsePrice.getText()) != 0 &&
+							Double.valueOf( panelComp.txfNewQuantity.getText()) != 0) {
 						
-						Date fecha = panelComp.dCFechaCompra.getDate();
+						try {
+							double cant = Double.valueOf(panelComp.txfNewQuantity.getText());
+							double precioT = Double.valueOf(panelComp.txfPuncharsePrice.getText());
+							
+							Date fecha = panelComp.dCFechaCompra.getDate();
+							
+							// create movement and delai
+							MovementDAO.create(new Movement(0, "in", precioT, fecha));
+							int lastM = MovementDAO.readLastM();
+							
+							// calculate CPP
+							double costoCPP = (prodGet.getCpp() * prodGet.getStock() +  precioT) / (prodGet.getStock() + cant);
+							// create dealing
+							DealingDAO.create(new Dealing(0, prodGet.getId(), cant, costoCPP, lastM));
+							
+							//update product
+							prodGet.setStock(prodGet.getStock() + cant); // change the stock value
+							prodGet.setCpp(costoCPP);
+							ProductDAO.update(prodGet);
+							break;
+							
+						} catch (Exception e) {
+							JOptionPane.showMessageDialog(null, "Alguno de los campos no son validos, verifique el contenido", "Alert", JOptionPane.WARNING_MESSAGE);
+						}
 						
-						// create movement and delai
-						MovementDAO.create(new Movement(0, "in", precioT, fecha));
-						int lastM = MovementDAO.readLastM();
-						
-						// calculate CPP
-						double costoCPP = (prodGet.getCpp() * prodGet.getStock() +  precioT) / (prodGet.getStock() + cant);
-						
-						DealingDAO.create(new Dealing(0, prodGet.getId(), cant, costoCPP, lastM));
-						break;
-						
-					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null, "Alguno de los campos no son validos, verifique el contenido", "Alert", JOptionPane.WARNING_MESSAGE);
+					}else if (Double.valueOf( panelComp.txfNewQuantity.getText()) == 0){
+						JOptionPane.showMessageDialog(null, "Intenta generar guardar una compra que registra sin cantidad o esta es de $0", "Alert", JOptionPane.WARNING_MESSAGE);
+					}else {
+						JOptionPane.showMessageDialog(null, "Intenta generar guardar una compra que registra sin precio o este es de $0", "Alert", JOptionPane.WARNING_MESSAGE);
 					}
 					
 				}else {

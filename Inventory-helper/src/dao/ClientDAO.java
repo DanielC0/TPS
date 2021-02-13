@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import objs.Category;
 import objs.Client;
 
 public class ClientDAO {

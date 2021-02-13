@@ -2,6 +2,8 @@ package uistyle;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
@@ -81,7 +83,12 @@ public class ComprarProducto extends JPanel {
 							) {
 						double cant = Double.valueOf(txfNewQuantity.getText());
 						double priceP = Double.valueOf(txfPuncharsePrice.getText());
-						txfUnitPrice.setText(String.valueOf((Double)(priceP / cant )));
+						if (cant != 0 ) {
+							txfUnitPrice.setText(String.valueOf((Double)(priceP / cant )));
+						}else {
+							txfUnitPrice.setText("0");
+						}
+						
 					}else if (tools.Utils.noempryString(txfUnitPrice.getText(), 1) && 
 							tools.Utils.noempryString(txfNewQuantity.getText(), 1) 
 							) {
@@ -121,7 +128,12 @@ public class ComprarProducto extends JPanel {
 					// calculate the unit price
 					double cant = Double.valueOf(txfNewQuantity.getText());
 					double priceP = Double.valueOf(txfPuncharsePrice.getText());
-					txfUnitPrice.setText(String.valueOf((Double)(priceP / cant)));
+					if(cant != 0 ) {
+						txfUnitPrice.setText(String.valueOf((Double)(priceP / cant)));
+					}else {
+						txfUnitPrice.setText("0");
+					}
+					
 				}
 			}
 		});
@@ -134,28 +146,9 @@ public class ComprarProducto extends JPanel {
 		panel_1.add(lblPrecioDeCompra);
 
 		txfUnitPrice = new WJTextFieldNumber("0");
-		txfUnitPrice.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (!tools.Utils.noempryString(txfUnitPrice.getText(), 1)) {
-					if (tools.Utils.noempryString(txfPuncharsePrice.getText(), 1) && 
-							tools.Utils.noempryString(txfNewQuantity.getText(), 1) 
-							) {
-						double cant = Double.valueOf(txfNewQuantity.getText());
-						double priceP = Double.valueOf(txfPuncharsePrice.getText());
-						txfUnitPrice.setText(String.valueOf((Double)(priceP / cant )));
-					}else {
-						txfUnitPrice.setText("0");
-					}
-				}else {
-					// calculate the puncharse price
-					double cant = Double.valueOf(txfNewQuantity.getText());
-					double priceU = Double.valueOf(txfUnitPrice.getText());
-					txfPuncharsePrice.setText(String.valueOf((Double)(priceU * cant)));
-				}
-			}
-		});
 		txfUnitPrice.setColumns(10);
+		txfUnitPrice.setEditable(false);
+		txfUnitPrice.setFocusable(false);
 		panel_1.add(txfUnitPrice);
 
 		JLabel lblFechaDeCompra = new JLabel("Fecha de compra");
@@ -164,6 +157,7 @@ public class ComprarProducto extends JPanel {
 		panel_1.add(lblFechaDeCompra);
 
 		dCFechaCompra = new JDateChooser();
+		dCFechaCompra.setForeground(Color.white);
 		panel_1.add(dCFechaCompra);
 
 	}
