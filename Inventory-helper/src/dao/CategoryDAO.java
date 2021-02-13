@@ -88,9 +88,13 @@ public class CategoryDAO {
 		int re=0;
 		try {
 			conn = AdminDAO.getConnection();
-			ResultSet rs = conn.createStatement().executeQuery("DELETE FROM category WHERE id='" + obj.getId()+ "'" );
-			if (rs.next())
-				re = 1;
+			PreparedStatement pstm = conn.prepareStatement("DELETE FROM category WHERE id = ? ");
+			pstm.setInt(1, obj.getId());	
+			pstm.executeUpdate();
+//			conn.exe
+//			conn.createStatement().executeQuery("DELETE FROM category WHERE id='" + obj.getId()+ "'" );
+//			if (rs.next())
+//				re = 1;
 
 		} catch (Exception e) {
 			System.out.println("erroe to delete category " + e);
