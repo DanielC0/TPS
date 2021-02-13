@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import dao.AdminDAO;
+import dao.ProductDAO;
 import objs.Category;
 import objs.Product;
 import uistyle.WDefaultTableModel;
@@ -161,31 +162,42 @@ public class PanelProducts extends javax.swing.JPanel {
     private void btnModifyProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyProductActionPerformed
     	int rwSelect = tableProducts.getSelectedRow();
     	if (rwSelect >= 0) {
-//    		Product ptmp = new Product(
-//        			(Integer)tableProducts.getValueAt(rwSelect, 1),
-//        			tableProducts.getValueAt(rwSelect, 2).toString(),
-//        			Double.valueOf(tableProducts.getValueAt(rwSelect, 3).toString()), 
-//        			tableProducts.getValueAt(rwSelect, 4).toString(), 
-//        			Double.valueOf(tableProducts.getValueAt(rwSelect, 5).toString()), 
-//        			Double.valueOf(tableProducts.getValueAt(rwSelect, 6).toString()), 
-//        			Integer.valueOf(tableProducts.getValueAt(rwSelect, 7).toString()));
+    		Product ptmp = new Product(
+        			(Integer)tableProducts.getValueAt(rwSelect, 0),
+        			tableProducts.getValueAt(rwSelect, 1).toString(),
+        			Double.valueOf(tableProducts.getValueAt(rwSelect, 2).toString()), 
+        			tableProducts.getValueAt(rwSelect, 3).toString(), 
+        			Double.valueOf(tableProducts.getValueAt(rwSelect, 4).toString()), 
+        			Double.valueOf(tableProducts.getValueAt(rwSelect, 5).toString()), 
+        			Integer.valueOf(tableProducts.getValueAt(rwSelect, 6).toString()));
+    		ptmp.categoryname = tableProducts.getValueAt(rwSelect, 7).toString();
 //    		Product prd = new Product(id, name, stock, desc, cpp, price, catid);
-    		
-    		new ModifyProduct();
+//    		System.out.println(tableProducts.getValueAt(rwSelect, 0));
+//    		Product prd = new Product((Integer)tableProducts.getValueAt(rwSelect, 1),"", 0, "", 0, 0, 1);
+    		new ModifyProduct(ptmp).pnlProd = this;
     	}else {
     		JOptionPane.showMessageDialog(null, "Selecione una fila de resitro a modificar", "Alerta", JOptionPane.WARNING_MESSAGE);
     	}
-    	
+    	 
     	
         
     }//GEN-LAST:event_btnModifyProductActionPerformed
 
     private void btnDeleteProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteProductActionPerformed
-        // TODO add your handling code here:
+    	int selectr = tableProducts.getSelectedRow();
+    	if(selectr >=0) { 
+    		if (JOptionPane.showConfirmDialog(null, "¿Desea elimnar el producto" +tableProducts.getValueAt(selectr, 1).toString() + "?") == JOptionPane.OK_OPTION) {
+    			ProductDAO.delete(new Product((Integer)tableProducts.getValueAt(selectr, 0),
+        				"", 0, "", 0, 0, 0));
+    			this.getData();
+    		}
+    	}else {
+    		JOptionPane.showMessageDialog(null, "Seleccione un registro a eliminar", "Alerta", JOptionPane.WARNING_MESSAGE);
+    	}
     }//GEN-LAST:event_btnDeleteProductActionPerformed
 
     private void btnRegisterProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterProductActionPerformed
-        
+    	
         new AddProduct().panlPrd = this;
     }//GEN-LAST:event_btnRegisterProductActionPerformed
 
@@ -228,7 +240,7 @@ public class PanelProducts extends javax.swing.JPanel {
 			//put sql
 			ResultSet rs =null;
 			rs = conn.createStatement().executeQuery(
-					"select product.id, product.name, product.stock, product.description, product.cpp, product.cpp, product.category, category.name from product join category on product.category = category.id" );
+					"select product.id, product.name, product.stock, product.description, product.cpp, product.price, product.category, category.name from product join category on product.category = category.id" );
 			
 			// load products
 			while (rs.next()) {
