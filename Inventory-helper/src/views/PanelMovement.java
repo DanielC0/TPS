@@ -4,7 +4,14 @@
  * and open the template in the editor.
  */
 package views;
- 
+
+import java.util.ArrayList;
+
+import dao.AdminDAO;
+import objs.Category;
+import objs.Movement;
+import uistyle.WDefaultTableModel;
+
 /**
  *
  * @author Daniel
@@ -44,63 +51,63 @@ public class PanelMovement extends javax.swing.JPanel {
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
-
-        tableDealings.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "Tipo", "Valor", "Fecha"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        getData();
+//        tableDealings.setModel(new javax.swing.table.DefaultTableModel(
+//            new Object [][] {
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null}
+//            },
+//            new String [] {
+//                "ID", "Tipo", "Valor", "Fecha"
+//            }
+//        ) {
+//            Class[] types = new Class [] {
+//                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+//            };
+//            boolean[] canEdit = new boolean [] {
+//                false, false, false, false
+//            };
+//
+//            public Class getColumnClass(int columnIndex) {
+//                return types [columnIndex];
+//            }
+//
+//            public boolean isCellEditable(int rowIndex, int columnIndex) {
+//                return canEdit [columnIndex];
+//            }
+//        });
         scrollPaneDealings.setViewportView(tableDealings);
         if (tableDealings.getColumnModel().getColumnCount() > 0) {
             tableDealings.getColumnModel().getColumn(0).setResizable(false);
@@ -183,6 +190,28 @@ public class PanelMovement extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnModifyMovementActionPerformed
      
+    
+    /***
+	 * Update the category table 
+	 */
+	public void getData() {
+		
+		ArrayList<objs.Movement> mvs = dao.MovementDAO.read();
+		AdminDAO.closeConnection();
+		//oad talbe model
+		WDefaultTableModel modeltb = new WDefaultTableModel(new String [] {"id", "Tipo","Valor", "Fecha de ejecucuíon"});
+		// load categories
+		for (int i = 0; i < mvs.size(); i++) {
+			Movement  movTemp = mvs.get(i);
+			modeltb.addRow(new Object[] {movTemp.getId(), movTemp.getKind(),movTemp.getPrice_total(), movTemp.getMoment()});
+		}
+		// change calls and sizes
+		tableDealings.setModel(modeltb);
+		WDefaultTableModel.setJTableColumnsWidth(tableDealings, 500, 90,200,200,200);
+//		WDefaultTableModel.wrapCell(tableDealings, 2);
+		
+	}
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeleteMovement;

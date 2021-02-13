@@ -60,7 +60,7 @@ public class ModifyProduct extends javax.swing.JFrame {
      */
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({ "rawtypes", "unchecked" })
 	private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -285,7 +285,6 @@ public class ModifyProduct extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            	Product p = new Product(1, "peras", 32.2, "comida mama", 0.23, 1.2, 1);
                 new ModifyProduct(new Product(1, "peras", 32.2, "comida mama", 0.23, 1.2, 1)).setVisible(true);
             }
         });
@@ -310,6 +309,6 @@ public class ModifyProduct extends javax.swing.JFrame {
     private JLabel lblId; 
     private JTextField txtId;
     private JLabel labelSalePrice_1;
-    private JComboBox comboBoxCategories;
+    private JComboBox<String> comboBoxCategories;
     ArrayList<Category> catsT =  null;
 }
