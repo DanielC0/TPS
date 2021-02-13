@@ -5,6 +5,15 @@
  */
 package views;
 
+import java.util.ArrayList;
+
+import javax.swing.JTable;
+
+import dao.AdminDAO;
+import objs.Category;
+import objs.Product;
+import uistyle.WDefaultTableModel;
+
 /**
  *
  * @author Daniel
@@ -175,4 +184,42 @@ public class PanelProducts extends javax.swing.JPanel {
     private javax.swing.JScrollPane scrollPaneProducts;
     private javax.swing.JTable tableProducts;
     // End of variables declaration//GEN-END:variables
+    
+    
+    
+    /////////////////////////////////BACKEND /////////////////////////////////
+    /***
+	 * Update the category table 
+	 */
+	public void getData() {
+		ArrayList<objs.Product> products = dao.ProductDAO.read();
+		AdminDAO.closeConnection();
+		// lod table model
+		WDefaultTableModel modeltb = new WDefaultTableModel(
+				new String [] {"id", "Nombre","cantidad" ,"description", "costo P.P.","Precio","Categoria"});
+		
+		// load products
+		for (int i = 0; i < products.size(); i++) {
+			Product prodTemp = products.get(i);
+			modeltb.addRow(new Object[] {
+					prodTemp.getId(),prodTemp.getName(),
+					prodTemp.getStock(),prodTemp.getDescription(),
+					prodTemp.getCpp(),prodTemp.getPrice(),
+					prodTemp.getCategory()
+					});
+		}
+		
+		tableProducts.setModel(modeltb);
+		// change calls and sizes
+		
+		WDefaultTableModel.setJTableColumnsWidth(tableProducts, 800, 10,200,200,200,200,200,200);
+		WDefaultTableModel.wrapCell(tableProducts, 4);
+	}
+	
+	/**
+	 * create product
+	 */
+	private void createProduct() {
+		
+	}
 }

@@ -189,18 +189,5 @@ public class PanelClients extends javax.swing.JPanel {
     private javax.swing.JTable tableClients;
     // End of variables declaration//GEN-END:variables
     
-    //////////////////////////// BACKEND//////////////////////////////////
-    public void upgradaData(JTable tb) {
-    	DefaultTableModel modelTb = new DefaultTableModel() {
-    		   public boolean isCellEditable (int row, int column) {
-    			   return false;
-    		   }
-    	};
-    	
-    	// add cols
-    	modelTb.addColumn("");
-    	//generate consult
-    	
-    	
-    }
+    
 }

@@ -4,7 +4,6 @@ import java.awt.Graphics;
 
 import javax.swing.UIManager;
 
-import com.formdev.flatlaf.FlatLightLaf;
 
 /** 
  *
@@ -185,8 +184,10 @@ public class Window extends javax.swing.JFrame {
             panelProducts = new views.PanelProducts();
             panelWindow.addTab("Productos", panelProducts);
             panelWindow.setSelectedComponent(panelProducts);
+            panelProducts.getData();
         }else{
             panelWindow.setSelectedComponent(panelProducts);
+            panelProducts.getData();
         }
         vpProducts="1";
     }
@@ -303,29 +304,15 @@ public class Window extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-//    	try {
-////    	    UIManager.setLookAndFeel( new FlatLightLaf() );
-//    	    UIManager.setLookAndFeel( new com.formdev.flatlaf.intellijthemes.FlatArcIJTheme() );
-//    	    
-//    	} catch( Exception ex ) {
-//    	    System.err.println( "Failed to initialize LaF" );
-//    	}
     	try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(CategoriesDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(CategoriesDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(CategoriesDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(CategoriesDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		}
+//    	    UIManager.setLookAndFeel( new FlatLightLaf() );
+//    	    UIManager.setLookAndFeel( new com.formdev.flatlaf.intellijthemes.FlatArcIJTheme() );
+    	    UIManager.setLookAndFeel( new com.formdev.flatlaf.intellijthemes.FlatMaterialDesignDarkIJTheme() );
+    	    
+    	    
+    	} catch( Exception ex ) {
+    	    System.err.println( "Failed to initialize LaF" );
+    	}
 
     	
         java.awt.EventQueue.invokeLater(new Runnable() {
