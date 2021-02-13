@@ -63,10 +63,10 @@ public class PaymentDAO {
 		try {
 			conn = AdminDAO.getConnection();
 			PreparedStatement prepatest = conn.prepareStatement("UPDATE payment SET credit=?, moment=?, price=? WHERE id=?");
-			prepatest.setInt(1,obj.getId());
-			prepatest.setInt(2,obj.getCredit());
-			prepatest.setDate(3,tools.Utils.dateUtlToSql( obj.getMoment()));
-			prepatest.setDouble(4,obj.getPrice());
+			prepatest.setInt(4,obj.getId());
+			prepatest.setInt(1,obj.getCredit());
+			prepatest.setDate(2,tools.Utils.dateUtlToSql( obj.getMoment()));
+			prepatest.setDouble(3,obj.getPrice());
 			registro = prepatest.executeUpdate();
 			if(registro > 0) {
 				System.out.println(" payment update successfully");
@@ -85,9 +85,9 @@ public class PaymentDAO {
 		int re=0;
 		try {
 			conn = AdminDAO.getConnection();
-			ResultSet rs = conn.createStatement().executeQuery("DELETE FROM payment WHERE id='" + obj.getId()+ "'" );
-			if (rs.next())
-				re = 1;
+			PreparedStatement pstm = conn.prepareStatement("DELETE FROM payment WHERE id=?" );
+			pstm.setInt(1, obj.getId());	
+			pstm.executeUpdate();
 
 		} catch (Exception e) {
 			System.out.println("erroe to delete payment " + e);

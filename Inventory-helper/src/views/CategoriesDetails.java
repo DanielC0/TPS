@@ -285,20 +285,20 @@ public class CategoriesDetails extends javax.swing.JFrame {
 			int result = JOptionPane.showConfirmDialog(
 					this, 
 					containerF,
-					"Ingrese la información necesaria",
+					"Ingrese la informacion necesaria",
 					JOptionPane.OK_CANCEL_OPTION
 					);
 			// validations
 			if (result == JOptionPane.OK_OPTION) {
 				
-				// start insert trasactiion
+				// start insert trasaction
 				// probe the name content
 				if (tools.Utils.noempryString(txfName.getText(), 3)) {
 					// start inset
 					if (CategoryDAO.create(new Category(0, txfName.getText(), txaDescr.getText())) > 0) {
 						AdminDAO.closeConnection();
 						alert.setForeground(Color.green);
-						alert.setText("Categoría guardada con exito!!");
+						alert.setText("Categoria guardada con exito!!");
 						txfName.setText("");
 						txaDescr.setText("");
 						this.getData();

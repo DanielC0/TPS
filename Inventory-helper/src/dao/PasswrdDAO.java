@@ -63,8 +63,8 @@ public class PasswrdDAO {
 		try {
 			conn = AdminDAO.getConnection();
 			PreparedStatement prepatest = conn.prepareStatement("UPDATE passwrd SET wordkey=? WHERE id=?");
-			prepatest.setInt(1,obj.getId());
-			prepatest.setString(2,obj.getWordkey());
+			prepatest.setInt(2,obj.getId());
+			prepatest.setString(1,obj.getWordkey());
 			registro = prepatest.executeUpdate();
 			if(registro > 0) {
 				System.out.println(" passwrd update successfully");
@@ -83,9 +83,9 @@ public class PasswrdDAO {
 		int re=0;
 		try {
 			conn = AdminDAO.getConnection();
-			ResultSet rs = conn.createStatement().executeQuery("DELETE FROM passwrd WHERE id='" + obj.getId()+ "'" );
-			if (rs.next())
-				re = 1;
+			PreparedStatement pstm = conn.prepareStatement("DELETE FROM passwrd WHERE id=?" );
+			pstm.setInt(1, obj.getId());	
+			pstm.executeUpdate();
 
 		} catch (Exception e) {
 			System.out.println("erroe to delete passwrd " + e);

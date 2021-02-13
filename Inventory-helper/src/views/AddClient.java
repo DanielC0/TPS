@@ -58,9 +58,9 @@ public class AddClient extends javax.swing.JFrame {
 
         labelCc.setText("Cedula:");
 
-        labelPhone.setText("Teléfono:");
+        labelPhone.setText("Telefono");
 
-        labelAddress.setText("Dirección:");
+        labelAddress.setText("Direccion:");
 
         btnCancel.setText("Cancelar");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {

@@ -5,8 +5,16 @@
  */
 package views;
  
+import java.util.ArrayList;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import com.sun.security.ntlm.Client;
+
+import dao.AdminDAO;
+import objs.Category;
+import uistyle.WDefaultTableModel;
 
 /**
  *
@@ -190,17 +198,27 @@ public class PanelClients extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     
     //////////////////////////// BACKEND//////////////////////////////////
-    public void upgradaData(JTable tb) {
-    	DefaultTableModel modelTb = new DefaultTableModel() {
-    		   public boolean isCellEditable (int row, int column) {
-    			   return false;
-    		   }
-    	};
-    	
-    	// add cols
-    	modelTb.addColumn("");
-    	//generate consult
-    	
-    	
-    }
+    /*
+    public void getData() {
+		ArrayList<objs.Client> client =  dao.ClientDAO.read();
+		AdminDAO.closeConnection();
+		//load table model
+		WDefaultTableModel modeltb = new WDefaultTableModel(new String [] {"id", "Nombre", "description"});
+		// load categories
+		for (int i = 0; i < client.size(); i++) {
+			Client cliTemp = client.get(i);
+			modeltb.addRow(new Object[] {cliTemp.getId(), cliTemp.getName(), cliTemp.getDescription()});
+		}
+		// change calls and sizes
+		tableClients.setModel(modeltb);
+		WDefaultTableModel.setJTableColumnsWidth(tableClients, 500, 100,200,200);
+		WDefaultTableModel.wrapCell(tableClients, 2);
+		
+	}*/
+    
+    
+    
+    
+    
+    
 }
