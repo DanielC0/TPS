@@ -10,7 +10,7 @@ public class CategoryDAO {
 	// CRUD
 
 	/*CREATE*/
-	public static void create(Category obj){
+	public static int create(Category obj){
 		Connection conn = null;
 		try {
 			//get connection
@@ -23,10 +23,12 @@ public class CategoryDAO {
 
 			if(prest.executeUpdate() > 0) {
 				System.out.println("category register successfully");			}
+				return 1;
 		} catch (Exception e) {
 			System.out.println("error to try register category");
 			e.printStackTrace();
 		}
+		return 0;
 	}
 
 	/*read select*/
@@ -65,9 +67,9 @@ public class CategoryDAO {
 		try {
 			conn = AdminDAO.getConnection();
 			PreparedStatement prepatest = conn.prepareStatement("UPDATE category SET name=?, description=? WHERE id=?");
-			prepatest.setInt(1,obj.getId());
-			prepatest.setString(2,obj.getName());
-			prepatest.setString(3,obj.getDescription());
+			prepatest.setInt(3,obj.getId());
+			prepatest.setString(1,obj.getName());
+			prepatest.setString(2,obj.getDescription());
 			registro = prepatest.executeUpdate();
 			if(registro > 0) {
 				System.out.println(" category update successfully");

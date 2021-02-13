@@ -196,5 +196,11 @@ public class PanelClients extends javax.swing.JPanel {
     			   return false;
     		   }
     	};
+    	
+    	// add cols
+    	modelTb.addColumn("");
+    	//generate consult
+    	
+    	
     }
 }
