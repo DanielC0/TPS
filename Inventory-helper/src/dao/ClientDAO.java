@@ -72,6 +72,8 @@ public class ClientDAO {
 			prepatest.setString(2,obj.getPhone());
 			prepatest.setString(3,obj.getAddress());
 			registro = prepatest.executeUpdate();
+
+			System.out.println("entro aqui" + obj.getCc());
 			if(registro > 0) {
 				System.out.println(" client update successfully");
 			}

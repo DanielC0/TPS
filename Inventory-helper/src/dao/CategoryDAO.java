@@ -74,7 +74,7 @@ public class CategoryDAO {
 			if(registro > 0) {
 				System.out.println(" category update successfully");
 			}
-		} catch (Exception e) {
+		}catch (Exception e) {
 			System.out.println("error to update category" + e);
 			e.printStackTrace();
 		}
