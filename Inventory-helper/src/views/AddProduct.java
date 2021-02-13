@@ -155,7 +155,9 @@ public class AddProduct extends javax.swing.JFrame {
     			
     			//starta save 
     			ProductDAO.create(new Product(0, txtName.getText(), 0, txtDescription.getText(), 0, 0, catsT.get( comboBoxCategory.getSelectedIndex() -1).getId()));
+    			panlPrd.getData(); 
     			this.dispose();
+    			
     		}else {
     			JOptionPane.showMessageDialog(null, "Selecione una categoria","alert",JOptionPane.WARNING_MESSAGE);
     		}
@@ -220,4 +222,5 @@ public class AddProduct extends javax.swing.JFrame {
 	JComboBox comboBoxCategory;
     
     ArrayList<Category> catsT =  null;
+    public PanelProducts panlPrd = null;  
 }

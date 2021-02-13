@@ -19,7 +19,7 @@ public class Product {
 	private double cpp;
 	private double price;
 	private int category;
-
+	public String categoryname;
 	/* constructor*/
 	public Product(int id, String name, double stock, String description, double cpp, double price, int category ){ 
 		this.id = id;

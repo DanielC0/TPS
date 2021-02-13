@@ -20,9 +20,9 @@ CREATE TABLE movement  (
 );
 
 CREATE TABLE client  (
-  cc INTEGER NOT NULL,
+  cc STRING NOT NULL,
   name STRING ( 1 , 50 ) NOT NULL,
-  phone INTEGER ,
+  phone STRING ,
   address STRING ,
   PRIMARY KEY( cc )
   

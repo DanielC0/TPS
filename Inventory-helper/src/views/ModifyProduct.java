@@ -5,8 +5,16 @@
  */
 package views;
 import javax.swing.GroupLayout.Alignment;
+
+import java.util.ArrayList;
+
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import dao.AdminDAO;
+import dao.CategoryDAO;
+import objs.Category;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -36,7 +44,8 @@ public class ModifyProduct extends javax.swing.JFrame {
      */
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    @SuppressWarnings("rawtypes")
+	private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
         labelName = new javax.swing.JLabel();
@@ -99,8 +108,15 @@ public class ModifyProduct extends javax.swing.JFrame {
         labelSalePrice_1 = new JLabel();
         labelSalePrice_1.setText("Precio de Venta:");
         
-        comboBox = new JComboBox();
-
+        comboBoxCategories = new JComboBox();
+        
+        comboBoxCategories.addItem("---");
+        catsT =  CategoryDAO.read();
+        AdminDAO.closeConnection();
+        for (int i = 0; i < catsT.size(); i++) {
+        	comboBoxCategories	.addItem(catsT.get(i).getName());
+		}
+        
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1Layout.setHorizontalGroup(
         	jPanel1Layout.createParallelGroup(Alignment.LEADING)
@@ -125,7 +141,7 @@ public class ModifyProduct extends javax.swing.JFrame {
         					.addPreferredGap(ComponentPlacement.RELATED)
         					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
         						.addComponent(txtId, GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-        						.addComponent(comboBox, 0, 264, Short.MAX_VALUE)
+        						.addComponent(comboBoxCategories, 0, 264, Short.MAX_VALUE)
         						.addComponent(txtName, 264, 264, Short.MAX_VALUE)
         						.addComponent(txtQuantity, 264, 264, Short.MAX_VALUE)
         						.addComponent(txtDescription, 264, 264, Short.MAX_VALUE)
@@ -171,7 +187,7 @@ public class ModifyProduct extends javax.swing.JFrame {
         			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(labelSalePrice_1)
-        				.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(comboBoxCategories, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         			.addGap(16)
         			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(btnCancel)
@@ -260,5 +276,6 @@ public class ModifyProduct extends javax.swing.JFrame {
     private JLabel lblId;
     private JTextField txtId;
     private JLabel labelSalePrice_1;
-    private JComboBox comboBox;
+    private JComboBox comboBoxCategories;
+    ArrayList<Category> catsT =  null;
 }

@@ -5,8 +5,11 @@
  */
 package views;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import dao.AdminDAO;
@@ -50,8 +53,9 @@ public class PanelProducts extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(2, 4));
         setPreferredSize(new java.awt.Dimension(600, 200));
         setLayout(new java.awt.BorderLayout());
-
-        tableProducts.setModel(new javax.swing.table.DefaultTableModel(
+        
+        this.getData();
+        /*tableProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -103,6 +107,7 @@ public class PanelProducts extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        */
         scrollPaneProducts.setViewportView(tableProducts);
         if (tableProducts.getColumnModel().getColumnCount() > 0) {
             tableProducts.getColumnModel().getColumn(0).setResizable(false);
@@ -154,8 +159,25 @@ public class PanelProducts extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnModifyProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyProductActionPerformed
-        // TODO add your handling code here:
-        new ModifyProduct();
+    	int rwSelect = tableProducts.getSelectedRow();
+    	if (rwSelect >= 0) {
+//    		Product ptmp = new Product(
+//        			(Integer)tableProducts.getValueAt(rwSelect, 1),
+//        			tableProducts.getValueAt(rwSelect, 2).toString(),
+//        			Double.valueOf(tableProducts.getValueAt(rwSelect, 3).toString()), 
+//        			tableProducts.getValueAt(rwSelect, 4).toString(), 
+//        			Double.valueOf(tableProducts.getValueAt(rwSelect, 5).toString()), 
+//        			Double.valueOf(tableProducts.getValueAt(rwSelect, 6).toString()), 
+//        			Integer.valueOf(tableProducts.getValueAt(rwSelect, 7).toString()));
+//    		Product prd = new Product(id, name, stock, desc, cpp, price, catid);
+    		
+    		new ModifyProduct();
+    	}else {
+    		JOptionPane.showMessageDialog(null, "Selecione una fila de resitro a modificar", "Alerta", JOptionPane.WARNING_MESSAGE);
+    	}
+    	
+    	
+        
     }//GEN-LAST:event_btnModifyProductActionPerformed
 
     private void btnDeleteProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteProductActionPerformed
@@ -163,13 +185,12 @@ public class PanelProducts extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDeleteProductActionPerformed
 
     private void btnRegisterProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterProductActionPerformed
-        // TODO add your handling code here:
         
-        new AddProduct();
+        new AddProduct().panlPrd = this;
     }//GEN-LAST:event_btnRegisterProductActionPerformed
 
     private void btnCategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriesActionPerformed
-        // TODO add your handling code here:
+    	System.out.println("");
         CategoriesDetails category = new CategoriesDetails();
         category.setVisible(true);
     }//GEN-LAST:event_btnCategoriesActionPerformed
@@ -192,34 +213,39 @@ public class PanelProducts extends javax.swing.JPanel {
 	 * Update the category table 
 	 */
 	public void getData() {
-		ArrayList<objs.Product> products = dao.ProductDAO.read();
-		AdminDAO.closeConnection();
+//		ArrayList<objs.Product> products = dao.ProductDAO.read();
+//		ArrayList<objs.Product> products = dao.ProductDAO.read("select ");
+//		select product.id, product.name, product.stock, product.description, product.cpp, product.price, product.category,
+//		category.name from product join categry on product.category = category.id
+		
 		// lod table model
 		WDefaultTableModel modeltb = new WDefaultTableModel(
-				new String [] {"id", "Nombre","cantidad" ,"description", "costo P.P.","Precio","Categoria"});
-		
-		// load products
-		for (int i = 0; i < products.size(); i++) {
-			Product prodTemp = products.get(i);
-			modeltb.addRow(new Object[] {
-					prodTemp.getId(),prodTemp.getName(),
-					prodTemp.getStock(),prodTemp.getDescription(),
-					prodTemp.getCpp(),prodTemp.getPrice(),
-					prodTemp.getCategory()
-					});
+				new String [] {"id", "Nombre","cantidad" ,"description", "costo P.P.","Precio","idCat","Categoria"});
+		Connection conn = null;
+		try {
+			//get Connection
+			conn = AdminDAO.getConnection();
+			//put sql
+			ResultSet rs =null;
+			rs = conn.createStatement().executeQuery(
+					"select product.id, product.name, product.stock, product.description, product.cpp, product.cpp, product.category, category.name from product join category on product.category = category.id" );
+			
+			// load products
+			while (rs.next()) {
+				modeltb.addRow( new Object[] {rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getDouble(5), rs.getDouble(6), rs.getInt(7),rs.getString(8)});
+			}
+			AdminDAO.closeConnection();
+		} catch (Exception e) {
+			System.out.println("error to select into product " + e);
+			e.printStackTrace();
 		}
 		
 		tableProducts.setModel(modeltb);
 		// change calls and sizes
 		
-		WDefaultTableModel.setJTableColumnsWidth(tableProducts, 800, 10,200,200,200,200,200,200);
-		WDefaultTableModel.wrapCell(tableProducts, 4);
+		WDefaultTableModel.setJTableColumnsWidth(tableProducts, 800, 10,200,200,200,200,200,200,200);
+//		WDefaultTableModel.wrapCell(tableProducts, 4);
 	}
 	
-	/**
-	 * create product
-	 */
-	private void createProduct() {
-		
-	}
+	
 }
