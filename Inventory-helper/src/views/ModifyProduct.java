@@ -135,7 +135,7 @@ public class ModifyProduct extends javax.swing.JFrame {
         txtId.setEditable(false);
         
         labelSalePrice_1 = new JLabel();
-        labelSalePrice_1.setText("Precio de Venta:");
+        labelSalePrice_1.setText("Categoria");
         
         comboBoxCategories = new JComboBox();
         

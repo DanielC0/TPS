@@ -139,7 +139,7 @@ public class AddClient extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     PanelClients pnl = new PanelClients();
-	
+	PanelHome combx = new PanelHome();
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
 	    	  
@@ -153,12 +153,13 @@ public class AddClient extends javax.swing.JFrame {
 						txtAddress.setText("");
 						//panel.getData();
 						JOptionPane.showMessageDialog(this, "Registrado con exito");
-						 
+						
 				}else {
 					JOptionPane.showMessageDialog(null, "Los campos de nombre y cedula deben de estar diligenciado y con m�s de 3 caracteres, Registrelo otra vez ;)","No se ha podido guardar",JOptionPane.ERROR_MESSAGE);
 				
 				}
 		pnl.getData();
+		combx.updateComboBox();
     	 
         this.dispose();
         
@@ -201,22 +202,6 @@ public class AddClient extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AddClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

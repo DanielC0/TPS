@@ -70,7 +70,7 @@ public class AddProduct extends javax.swing.JFrame {
             }
         });
 
-        labelDescription.setText("Descripción:");
+        labelDescription.setText("Descripcion:");
 
         btnCancel.setText("Cancelar");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +87,7 @@ public class AddProduct extends javax.swing.JFrame {
         });
         
         JLabel labelSalePrice_1 = new JLabel();
-        labelSalePrice_1.setText("Categoría");
+        labelSalePrice_1.setText("Categoria");
         
         comboBoxCategory= new JComboBox();
         comboBoxCategory.addItem("---");

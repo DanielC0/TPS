@@ -240,13 +240,13 @@ public class PanelProducts extends javax.swing.JPanel {
     
     /////////////////////////////////BACKEND /////////////////////////////////
     /***
-	 * Update the category table 
+	 * Update the Product table 
 	 */
 	public void getData() {
 //		ArrayList<objs.Product> products = dao.ProductDAO.read();
 //		ArrayList<objs.Product> products = dao.ProductDAO.read("select ");
 //		select product.id, product.name, product.stock, product.description, product.cpp, product.price, product.category,
-//		category.name from product join categry on product.category = category.id
+//		category.name from product join category on product.category = category.id
 		
 		// lod table model
 		WDefaultTableModel modeltb = new WDefaultTableModel(

@@ -4,7 +4,27 @@
  * and open the template in the editor.
  */
 package views;
- 
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import dao.AdminDAO;
+import dao.ClientDAO;
+import objs.Client;
+import uistyle.WDefaultTableModel;
+import java.awt.Dimension;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -32,8 +52,7 @@ public class PanelHome extends javax.swing.JPanel {
     private void initComponents() {
 
         panelLeft = new javax.swing.JPanel();
-        scrollPaneStock = new javax.swing.JScrollPane();
-        tableStock = new javax.swing.JTable();
+        scrollPaneStock = new javax.swing.JScrollPane(); 
         panelCenter = new javax.swing.JPanel();
         panelTitleSales = new javax.swing.JPanel();
         labelSale = new javax.swing.JLabel();
@@ -41,20 +60,34 @@ public class PanelHome extends javax.swing.JPanel {
         labelQuantity = new javax.swing.JLabel();
         txtQuantity = new javax.swing.JTextField();
         btnAddSelectedProduct = new javax.swing.JButton();
+        
+        btnAddSelectedProduct.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		/*int rwselect = tableStock.getSelectedRow();
+    			WDefaultTableModel modeltb = new WDefaultTableModel(
+    					new String [] {"Nombre","cantidad" ,"Precio unitario",});
+        		if(rwselect >= 0){
+        			
+        			
+        			modeltb.addRow(new Object[] {tableStock.getValueAt(rwselect,0).toString(), txtQuantity.getText(), 
+        										(Double.valueOf(tableOrder.getValueAt(rwselect, 2).toString())*(Double.valueOf(txtQuantity.getText()))) });
+        			
+        			
+        			
+        		}
+        		tableOrder.setModel(modeltb);
+        		*/
+        		
+        	}
+        });
         panelTitleClient = new javax.swing.JPanel();
         labelDataClient = new javax.swing.JLabel();
         panelDataClient = new javax.swing.JPanel();
-        txtName = new javax.swing.JTextField();
-        labelName = new javax.swing.JLabel();
-        labelCc = new javax.swing.JLabel();
-        txtCc = new javax.swing.JTextField();
-        txtPhone = new javax.swing.JTextField();
-        labelPhone = new javax.swing.JLabel();
-        labelAdress = new javax.swing.JLabel();
-        txtAddress = new javax.swing.JTextField();
         panelRight = new javax.swing.JPanel();
         scrollPaneOrder = new javax.swing.JScrollPane();
         tableOrder = new javax.swing.JTable();
+        tableStock = new javax.swing.JTable();
         panelTotalLabels = new javax.swing.JPanel();
         labelTotalTitle = new javax.swing.JLabel();
         labelTotalAmount = new javax.swing.JLabel();
@@ -63,56 +96,17 @@ public class PanelHome extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setMaximumSize(new java.awt.Dimension(1200, 400));
         setMinimumSize(new java.awt.Dimension(2, 4));
-        setPreferredSize(new java.awt.Dimension(600, 200));
+        setPreferredSize(new Dimension(727, 375));
         setLayout(new java.awt.GridLayout(1, 0));
 
         panelLeft.setLayout(new java.awt.GridLayout(1, 0));
+        
+        
 
-        tableStock.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Nombre", "Stock", "Precio de venta"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        this.getData();
+       
+        
+        
         scrollPaneStock.setViewportView(tableStock);
         if (tableStock.getColumnModel().getColumnCount() > 0) {
             tableStock.getColumnModel().getColumn(0).setResizable(false);
@@ -175,73 +169,52 @@ public class PanelHome extends javax.swing.JPanel {
         panelTitleClient.add(labelDataClient);
 
         panelCenter.add(panelTitleClient);
-
-        txtName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
-            }
-        });
-
-        labelName.setText("Nombre:");
-
-        labelCc.setText("Cedula:");
-
-        txtCc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCcActionPerformed(evt);
-            }
-        });
-
-        labelPhone.setText("Teléfono:");
-
-        labelAdress.setText("Dirección:");
-
-        txtAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAddressActionPerformed(evt);
-            }
+        
+        
+        updateComboBox();
+        
+        JLabel lblNewLabel = new JLabel("Seleccione un cliente:");
+        
+        JLabel lblNewLabel_1 = new JLabel("Registrar cliente:");
+        
+        JButton btnAddClient = new JButton("Registrar");
+        btnAddClient.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		new AddClient();
+        		
+        		
+        	}
         });
 
         javax.swing.GroupLayout panelDataClientLayout = new javax.swing.GroupLayout(panelDataClient);
-        panelDataClient.setLayout(panelDataClientLayout);
         panelDataClientLayout.setHorizontalGroup(
-            panelDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDataClientLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(labelAdress, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                    .addComponent(labelPhone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelCc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                    .addComponent(txtCc, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtAddress)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap())
+        	panelDataClientLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(panelDataClientLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(panelDataClientLayout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(comboBoxClientsRegistered, 0, 221, Short.MAX_VALUE)
+        				.addComponent(lblNewLabel)
+        				.addGroup(panelDataClientLayout.createSequentialGroup()
+        					.addComponent(lblNewLabel_1)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(btnAddClient, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)))
+        			.addContainerGap())
         );
         panelDataClientLayout.setVerticalGroup(
-            panelDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDataClientLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(panelDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelName)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
-                .addGroup(panelDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelCc)
-                    .addComponent(txtCc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(panelDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelPhone))
-                .addGap(22, 22, 22)
-                .addGroup(panelDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelAdress))
-                .addContainerGap(78, Short.MAX_VALUE))
+        	panelDataClientLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(panelDataClientLayout.createSequentialGroup()
+        			.addGap(29)
+        			.addComponent(lblNewLabel)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(comboBoxClientsRegistered, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addGroup(panelDataClientLayout.createParallelGroup(Alignment.LEADING, false)
+        				.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        				.addComponent(btnAddClient, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        			.addContainerGap(94, Short.MAX_VALUE))
         );
+        panelDataClient.setLayout(panelDataClientLayout);
 
         panelCenter.add(panelDataClient);
 
@@ -337,28 +310,12 @@ public class PanelHome extends javax.swing.JPanel {
     private void btnRegisterSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterSaleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegisterSaleActionPerformed
-
-    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNameActionPerformed
-
-    private void txtCcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCcActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCcActionPerformed
-
-    private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddressActionPerformed
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddSelectedProduct;
     private javax.swing.JButton btnRegisterSale;
-    private javax.swing.JLabel labelAdress;
-    private javax.swing.JLabel labelCc;
     private javax.swing.JLabel labelDataClient;
-    private javax.swing.JLabel labelName;
-    private javax.swing.JLabel labelPhone;
     private javax.swing.JLabel labelQuantity;
     private javax.swing.JLabel labelSale;
     private javax.swing.JLabel labelTotalAmount;
@@ -374,11 +331,72 @@ public class PanelHome extends javax.swing.JPanel {
     private javax.swing.JScrollPane scrollPaneOrder;
     private javax.swing.JScrollPane scrollPaneStock;
     private javax.swing.JTable tableOrder;
-    private javax.swing.JTable tableStock;
-    private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtCc;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPhone;
+    public javax.swing.JTable tableStock;
     private javax.swing.JTextField txtQuantity;
     // End of variables declaration//GEN-END:variables
+    ArrayList<Client> clients = null;
+    JComboBox comboBoxClientsRegistered = new JComboBox<>();
+    /////////////////////////////////BACKEND /////////////////////////////////
+    /***
+	 * Update the category table 
+	 */
+	public void getData() {
+//		ArrayList<objs.Product> products = dao.ProductDAO.read();
+//		ArrayList<objs.Product> products = dao.ProductDAO.read("select ");
+//		select product.id, product.name, product.stock, product.description, product.cpp, product.price, product.category,
+//		category.name from product join category on product.category = category.id
+		System.out.println("aaaaaaaaaa getdata ");
+		// lod table model
+		WDefaultTableModel modeltb = new WDefaultTableModel(
+				new String [] {"Nombre","cantidad", "Precio"});
+		Connection conn = null;
+		try {
+			//get Connection
+			conn = AdminDAO.getConnection();
+			//put sql
+			ResultSet rs =null;
+			rs = conn.createStatement().executeQuery(
+					"select name, stock, price from product"); 
+			
+			// load products
+			while (rs.next()) {
+				modeltb.addRow( new Object[] {rs.getString(1), rs.getDouble(2), rs.getDouble(3)});
+			}
+			AdminDAO.closeConnection();
+		} catch (Exception e) {
+			System.out.println("error to select into product " + e);
+			e.printStackTrace();
+		}
+		
+		tableStock.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null},
+			},
+			new String[] {
+				"Nombre", "cantidad", "Precio unitario"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Object.class, Object.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		// change calls and sizes
+		
+		//WDefaultTableModel.setJTableColumnsWidth(tableStock, 800, 10,200,200,200,200,200,200,200);
+		//WDefaultTableModel.wrapCell(tableProducts, 4); 
+	}
+	
+	public void updateComboBox(){
+		comboBoxClientsRegistered.removeAllItems();
+        comboBoxClientsRegistered.addItem("---");
+    	clients = ClientDAO.read();
+        AdminDAO.closeConnection();
+        for (int i = 0; i < clients.size(); i++) {
+        	System.out.println("entra al for " + i);
+        	comboBoxClientsRegistered.addItem(clients.get(i).getCc() + " - "+ clients.get(i).getName());
+		}
+    }
 }
