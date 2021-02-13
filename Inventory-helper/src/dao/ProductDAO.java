@@ -61,6 +61,26 @@ public class ProductDAO {
 	public static ArrayList<Product> read(){
 		return ProductDAO.read("");
 	}
+	
+	public static ArrayList<Product> readLastId(){
+		ArrayList<Product> allobjts=null;
+		Connection conn = null;
+		try {
+			//get Connection
+			conn = AdminDAO.getConnection();
+			//put sql
+			ResultSet rs =null;
+			rs = conn.createStatement().executeQuery("SELECT MAX(id) FROM product" );
+			allobjts= new ArrayList<Product>();
+			while (rs.next()) {
+				allobjts.add( new Product(rs.getInt(1),"", 0, "", 0, 0, 0));
+			}
+		} catch (Exception e) {
+			System.out.println("error to select into product " + e);
+			e.printStackTrace();
+		}
+		return allobjts;
+	}
 
 	/*UPDATE*/
 	public static int update(Product obj){
