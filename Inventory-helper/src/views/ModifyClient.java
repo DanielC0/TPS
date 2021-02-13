@@ -4,7 +4,16 @@
  * and open the template in the editor.
  */
 package views;
- 
+
+import javax.swing.JOptionPane;
+
+import dao.AdminDAO;
+import dao.ClientDAO;
+import objs.Client;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
 /**
  *
  * @author Daniel
@@ -15,15 +24,22 @@ public class ModifyClient extends javax.swing.JFrame {
      * Creates new form agregarProducto
      */
     public ModifyClient() {
+
         initComponents();
+    }
+    String cc;
+    public ModifyClient(String doc, String name, String phone, String adress){
+    	
+
+        initComponents();
+        cc = doc;
+        txtName.setText(name);
+        txtPhone.setText(phone);
+        txtAddress.setText(adress);
         
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setVisible(true);
-    }
-    
-    public ModifyClient(String cc, String name, String phone, String adress){
-    	
     	
     }
 
@@ -39,8 +55,6 @@ public class ModifyClient extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         labelName = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        labelCc = new javax.swing.JLabel();
-        txtCc = new javax.swing.JTextField();
         labelPhone = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
         labelAddress = new javax.swing.JLabel();
@@ -59,11 +73,9 @@ public class ModifyClient extends javax.swing.JFrame {
             }
         });
 
-        labelCc.setText("Cedula:");
+        labelPhone.setText("Telefono");
 
-        labelPhone.setText("Teléfono:");
-
-        labelAddress.setText("Dirección:");
+        labelAddress.setText("Direccion");
 
         btnCancel.setText("Cancelar");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -80,57 +92,50 @@ public class ModifyClient extends javax.swing.JFrame {
         });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(labelName, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelPhone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(labelAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
-                            .addComponent(labelCc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
-                            .addComponent(txtAddress)
-                            .addComponent(txtPhone)
-                            .addComponent(txtCc)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnModify)
-                        .addGap(26, 26, 26)
-                        .addComponent(btnCancel)))
-                .addContainerGap())
+        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING)
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING, false)
+        						.addComponent(labelName, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(labelPhone, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        						.addComponent(labelAddress, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(txtName, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+        						.addComponent(txtAddress, 274, 274, 274)
+        						.addComponent(txtPhone, 274, 274, 274)))
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addGap(0, 206, Short.MAX_VALUE)
+        					.addComponent(btnModify)
+        					.addGap(26)
+        					.addComponent(btnCancel)))
+        			.addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelCc)
-                    .addComponent(txtCc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelName)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelPhone))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelAddress))
-                .addGap(35, 35, 35)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnModify)
-                    .addComponent(btnCancel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addGap(74)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(labelName)
+        				.addComponent(txtName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(18)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(txtPhone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(labelPhone))
+        			.addGap(18)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(txtAddress, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(labelAddress))
+        			.addGap(35)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(btnModify)
+        				.addComponent(btnCancel))
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        jPanel1.setLayout(jPanel1Layout);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -140,10 +145,23 @@ public class ModifyClient extends javax.swing.JFrame {
     PanelClients pnl = new PanelClients();
     private void btnModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyActionPerformed
         
+    	if (tools.Utils.noempryString(txtName.getText(), 3)) {
+			// start insert
+        		ClientDAO.update(new Client(cc, txtName.getText(), txtPhone.getText(), txtAddress.getText()));
+				AdminDAO.closeConnection(); 
+				txtName.setText(""); 
+				txtPhone.setText("");
+				txtAddress.setText("");
+				//panel.getData();
+				JOptionPane.showMessageDialog(this, "Registrado con exito");
+				 
+		}else {
+			JOptionPane.showMessageDialog(null, "Los campos de nombre y cedula deben de estar diligenciado y con m�s de 3 caracteres, Modifiquelo otra vez ;)","No se ha podido guardar",JOptionPane.ERROR_MESSAGE);
+		
+		}
+    	
 
-    	
-    	
-    	
+		pnl.getData();
     	
         this.dispose();
     }//GEN-LAST:event_btnModifyActionPerformed
@@ -197,11 +215,9 @@ public class ModifyClient extends javax.swing.JFrame {
     private javax.swing.JButton btnModify;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelAddress;
-    private javax.swing.JLabel labelCc;
     private javax.swing.JLabel labelName;
     private javax.swing.JLabel labelPhone;
     private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtCc;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPhone;
     // End of variables declaration//GEN-END:variables

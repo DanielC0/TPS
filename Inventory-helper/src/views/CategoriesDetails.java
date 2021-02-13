@@ -356,7 +356,7 @@ public class CategoriesDetails extends javax.swing.JFrame {
 				int result = JOptionPane.showConfirmDialog(
 						this, 
 						containerF,
-						"Ingrese la información necesaria",
+						"Ingrese la informacion necesaria",
 						JOptionPane.OK_CANCEL_OPTION
 						);
 				// validations
@@ -370,7 +370,7 @@ public class CategoriesDetails extends javax.swing.JFrame {
 						CategoryDAO.update(new Category(idCategory, txfName.getText(), txaDescr.getText()));
 						AdminDAO.closeConnection();
 						alert.setForeground(Color.green);
-						alert.setText("Categoría guardada con exito!!");
+						alert.setText("Categoria guardada con exito!!");
 						this.getData();
 						break;
 						

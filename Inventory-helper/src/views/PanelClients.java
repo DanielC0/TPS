@@ -7,11 +7,14 @@ package views;
  
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
 import dao.AdminDAO;
+import dao.CategoryDAO;
+import dao.ClientDAO;
 import objs.Category;
 import objs.Client;
 import uistyle.WDefaultTableModel;
@@ -179,14 +182,26 @@ public class PanelClients extends javax.swing.JPanel {
     	
 
 		int rwselect = tableClients.getSelectedRow();
-		
+		if(rwselect >= 0){
     	
-        new ModifyClient().pnl=this;
+        new ModifyClient(tableClients.getValueAt(rwselect, 0).toString(),tableClients.getValueAt(rwselect, 1).toString(),tableClients.getValueAt(rwselect, 2).toString(),tableClients.getValueAt(rwselect, 3).toString()).pnl=this;
+		}else {
+			JOptionPane.showMessageDialog(this, "Seleccione una fila");
+		}
     }//GEN-LAST:event_btnModifyClientActionPerformed
 
     private void btnDeleteClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteClientActionPerformed
         // TODO add your handling code here:
-        
+    	int rwselect = tableClients.getSelectedRow();
+		if(rwselect >= 0){
+    	
+        ClientDAO.delete(new Client(tableClients.getValueAt(rwselect, 0).toString(),tableClients.getValueAt(rwselect, 1).toString(),tableClients.getValueAt(rwselect, 2).toString(),tableClients.getValueAt(rwselect, 3).toString()));
+        JOptionPane.showMessageDialog(this, "Eliminado con exito");
+        this.getData();
+		}else {
+			JOptionPane.showMessageDialog(this, "Seleccione una fila");
+		}
+    	
         
     }//GEN-LAST:event_btnDeleteClientActionPerformed
 

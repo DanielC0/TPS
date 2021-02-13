@@ -56,7 +56,7 @@ public class AddCredit extends javax.swing.JFrame {
 
         labelCc.setText("Cedula:");
 
-        labelPhone.setText("Teléfono:");
+        labelPhone.setText("Telefono:");
 
         labelAmount.setText("Monto:");
 
