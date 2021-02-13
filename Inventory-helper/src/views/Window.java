@@ -177,6 +177,7 @@ public class Window extends javax.swing.JFrame {
         }else{
             panelWindow.setSelectedComponent(panelHome);
             panelHome.getData();
+            panelHome.updateComboBox();
         }
         vpHome="1";
     } 
