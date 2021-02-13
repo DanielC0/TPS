@@ -5,6 +5,7 @@
  */
 package views;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import dao.AdminDAO;
@@ -148,7 +149,6 @@ public class PanelMovement extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSeeDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeDetailsActionPerformed
-        // TODO add your handling code here:
         
         /*
         in = entrada (cuando compro)
@@ -161,7 +161,7 @@ public class PanelMovement extends javax.swing.JPanel {
         
         if(tipo_de_movimiento_seleccionado == "in" || tipo_de_movimiento_seleccionado == "out"){
         
-            DealingsDetails dealingDetails = new DealingsDetails();
+            DealingsDetails dealingDetail12s = new DealingsDetails();
             dealingDetails.setVisible(true);  
         }else if (tipo_de_movimiento_seleccionado == "extin" || tipo_de_movimiento_seleccionado == "extout"){
             ExternalPaymentDetails exDetails = new ExternalPaymentDetails();
@@ -203,7 +203,11 @@ public class PanelMovement extends javax.swing.JPanel {
 		// load categories
 		for (int i = 0; i < mvs.size(); i++) {
 			Movement  movTemp = mvs.get(i);
-			modeltb.addRow(new Object[] {movTemp.getId(), movTemp.getKind(),movTemp.getPrice_total(), movTemp.getMoment()});
+			String pattern = "yyyy/MM/dd ";
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+			
+//			Date momentP = movTemp.getMoment();
+			modeltb.addRow(new Object[] {movTemp.getId(), movTemp.getKind(),movTemp.getPrice_total(), simpleDateFormat.format(movTemp.getMoment())});
 		}
 		// change calls and sizes
 		tableDealings.setModel(modeltb);

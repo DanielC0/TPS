@@ -58,6 +58,26 @@ public class MovementDAO {
 	public static ArrayList<Movement> read(){
 		return MovementDAO.read("");
 	}
+	public static int readLastM(){
+		ArrayList<Movement> allobjts=null;
+		Connection conn = null;
+		try {
+			//get Connection
+			conn = AdminDAO.getConnection();
+			//put sql
+			ResultSet rs =null;
+			rs = conn.createStatement().executeQuery("select MAX(id) from movement " );
+
+			allobjts= new ArrayList<Movement>();
+			while (rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (Exception e) {
+			System.out.println("error to select into movement " + e);
+			e.printStackTrace();
+		}
+		return 0;
+	}
 
 	/*UPDATE*/
 	public static int update(Movement obj){

@@ -369,10 +369,7 @@ public class PanelHome extends javax.swing.JPanel {
 		}
 		
 		tableStock.setModel(modeltb);
-		// change calls and sizes
-		
-		//WDefaultTableModel.setJTableColumnsWidth(tableStock, 800, 10,200,200,200,200,200,200,200);
-		//WDefaultTableModel.wrapCell(tableProducts, 4); 
+
 	}
 	
 	public void updateComboBox(){
