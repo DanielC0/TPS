@@ -5,6 +5,24 @@
  */
 package views;
 
+import com.toedter.calendar.JDateChooser;
+
+import dao.AdminDAO;
+import dao.CategoryDAO;
+import dao.ProductDAO;
+import objs.Category;
+import objs.Product;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.GroupLayout.Alignment;
+
+import java.util.ArrayList;
+
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JComboBox;
+import java.awt.BorderLayout;
+
 /**
  *
  * @author Daniel
@@ -30,21 +48,14 @@ public class AddProduct extends javax.swing.JFrame {
      */
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
         labelName = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        labelQuantity = new javax.swing.JLabel();
-        txtQuantity = new javax.swing.JTextField();
         labelDescription = new javax.swing.JLabel();
         txtDescription = new javax.swing.JTextField();
-        labelPurchaseDate = new javax.swing.JLabel();
-        txtPurchaseDate = new javax.swing.JTextField();
-        labelPurchasePrice = new javax.swing.JLabel();
-        txtPurchasePrice = new javax.swing.JTextField();
-        labelSalePrice = new javax.swing.JLabel();
-        txtSalePrice = new javax.swing.JTextField();
         btnCancel = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
 
@@ -59,15 +70,7 @@ public class AddProduct extends javax.swing.JFrame {
             }
         });
 
-        labelQuantity.setText("Cantidad:");
-
         labelDescription.setText("Descripción:");
-
-        labelPurchaseDate.setText("Fecha de compra:");
-
-        labelPurchasePrice.setText("Precio de compra:");
-
-        labelSalePrice.setText("Precio de Venta:");
 
         btnCancel.setText("Cancelar");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -82,90 +85,92 @@ public class AddProduct extends javax.swing.JFrame {
                 btnAddActionPerformed(evt);
             }
         });
+        
+        JLabel labelSalePrice_1 = new JLabel();
+        labelSalePrice_1.setText("Categoría");
+        
+        comboBoxCategory= new JComboBox();
+        comboBoxCategory.addItem("---");
+        catsT =  CategoryDAO.read();
+        AdminDAO.closeConnection();
+        for (int i = 0; i < catsT.size(); i++) {
+			comboBoxCategory.addItem(catsT.get(i).getName());
+		}
+        
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelPurchasePrice)
-                    .addComponent(labelSalePrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(labelName, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(labelPurchaseDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(labelQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(labelDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtName)
-                    .addComponent(txtPurchasePrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-                    .addComponent(txtPurchaseDate)
-                    .addComponent(txtQuantity)
-                    .addComponent(txtDescription)
-                    .addComponent(txtSalePrice))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnAdd)
-                .addGap(18, 18, 18)
-                .addComponent(btnCancel)
-                .addGap(10, 10, 10))
+        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(labelName, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(labelDescription)
+        						.addComponent(labelSalePrice_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(txtDescription, 264, 264, Short.MAX_VALUE)
+        						.addComponent(comboBoxCategory, 0, 264, Short.MAX_VALUE)
+        						.addComponent(txtName, GroupLayout.PREFERRED_SIZE, 264, GroupLayout.PREFERRED_SIZE))
+        					.addContainerGap())
+        				.addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        					.addComponent(btnAdd)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(btnCancel)
+        					.addGap(77))))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelName)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelQuantity)
-                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelDescription)
-                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPurchaseDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelPurchaseDate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPurchasePrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelPurchasePrice))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSalePrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelSalePrice))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
-                    .addComponent(btnCancel))
-                .addGap(71, 71, 71))
+        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addGap(9)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(labelName)
+        				.addComponent(txtName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(30)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(labelDescription)
+        				.addComponent(txtDescription, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(35)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(labelSalePrice_1)
+        				.addComponent(comboBoxCategory, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(btnCancel)
+        				.addComponent(btnAdd))
+        			.addContainerGap(34, Short.MAX_VALUE))
         );
+        jPanel1.setLayout(jPanel1Layout);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jPanel1, BorderLayout.NORTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-    	
-        this.dispose();
-    }//GEN-LAST:event_btnAddActionPerformed
+    	if (tools.Utils.noempryString(txtName.getText(), 3)) {
+    		if(comboBoxCategory.getSelectedIndex() != 0) {
+    			
+    			//starta save 
+    			ProductDAO.create(new Product(0, txtName.getText(), 0, txtDescription.getText(), 0, 0, catsT.get( comboBoxCategory.getSelectedIndex() -1).getId()));
+    			this.dispose();
+    		}else {
+    			JOptionPane.showMessageDialog(null, "Selecione una categoria","alert",JOptionPane.WARNING_MESSAGE);
+    		}
+    		
+    	}else {
+    		JOptionPane.showMessageDialog(null, "El campo Nombre para el producto es obligatorio","alert",JOptionPane.ERROR_MESSAGE);
+    	}
+    }
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_btnCancelActionPerformed
+    }
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNameActionPerformed
+    }
 
     /**
      * @param args the command line arguments
@@ -207,17 +212,12 @@ public class AddProduct extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelDescription;
     private javax.swing.JLabel labelName;
-    private javax.swing.JLabel labelPurchaseDate;
-    private javax.swing.JLabel labelPurchasePrice;
-    private javax.swing.JLabel labelQuantity;
-    private javax.swing.JLabel labelSalePrice;
     private javax.swing.JTextField txtDescription;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPurchaseDate;
-    private javax.swing.JTextField txtPurchasePrice;
-    private javax.swing.JTextField txtQuantity;
-    private javax.swing.JTextField txtSalePrice;
-    // End of variables declaration//GEN-END:variables
+//    private javax.swing.JTextField txtPurchaseDate;
+    JDateChooser txtPurchaseDate = new JDateChooser("yyyy/MM/dd", "####/##/##", ' ');
+    @SuppressWarnings("rawtypes")
+	JComboBox comboBoxCategory;
     
-    
+    ArrayList<Category> catsT =  null;
 }
