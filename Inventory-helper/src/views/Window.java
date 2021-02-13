@@ -172,8 +172,10 @@ public class Window extends javax.swing.JFrame {
         panelHome = new views.PanelHome();
         panelWindow.addTab("Caja", panelHome);
         panelWindow.setSelectedComponent(panelHome);
+        panelHome.getData();
         }else{
             panelWindow.setSelectedComponent(panelHome);
+            panelHome.getData();
         }
         vpHome="1";
     } 
@@ -258,7 +260,6 @@ public class Window extends javax.swing.JFrame {
     
     
     
-    
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
         openHome();
@@ -321,7 +322,7 @@ public class Window extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton brtnCredits;
     private javax.swing.JButton btnClients;
