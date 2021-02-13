@@ -69,13 +69,13 @@ public class ProductDAO {
 		try {
 			conn = AdminDAO.getConnection();
 			PreparedStatement prepatest = conn.prepareStatement("UPDATE product SET name=?, stock=?, description=?, cpp=?, price=?, category=? WHERE id=?");
-			prepatest.setInt(1,obj.getId());
-			prepatest.setString(2,obj.getName());
-			prepatest.setDouble(3,obj.getStock());
-			prepatest.setString(4,obj.getDescription());
-			prepatest.setDouble(5,obj.getCpp());
-			prepatest.setDouble(6,obj.getPrice());
-			prepatest.setInt(7,obj.getCategory());
+			prepatest.setInt(7,obj.getId());
+			prepatest.setString(1,obj.getName());
+			prepatest.setDouble(2,obj.getStock());
+			prepatest.setString(3,obj.getDescription());
+			prepatest.setDouble(4,obj.getCpp());
+			prepatest.setDouble(5,obj.getPrice());
+			prepatest.setInt(6,obj.getCategory());
 			registro = prepatest.executeUpdate();
 			if(registro > 0) {
 				System.out.println(" product update successfully");
@@ -94,9 +94,9 @@ public class ProductDAO {
 		int re=0;
 		try {
 			conn = AdminDAO.getConnection();
-			ResultSet rs = conn.createStatement().executeQuery("DELETE FROM product WHERE id='" + obj.getId()+ "'" );
-			if (rs.next())
-				re = 1;
+			PreparedStatement pstm = conn.prepareStatement("DELETE FROM product WHERE id=?" );
+			pstm.setInt(1, obj.getId());	
+			pstm.executeUpdate();
 
 		} catch (Exception e) {
 			System.out.println("erroe to delete product " + e);

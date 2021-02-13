@@ -64,9 +64,9 @@ public class CreditDAO {
 		try {
 			conn = AdminDAO.getConnection();
 			PreparedStatement prepatest = conn.prepareStatement("UPDATE credit SET client=?, movement=? WHERE id=?");
-			prepatest.setInt(1,obj.getId());
-			prepatest.setInt(2,obj.getClient());
-			prepatest.setInt(3,obj.getMovement());
+			prepatest.setInt(3,obj.getId());
+			prepatest.setInt(1,obj.getClient());
+			prepatest.setInt(2,obj.getMovement());
 			registro = prepatest.executeUpdate();
 			if(registro > 0) {
 				System.out.println(" credit update successfully");
@@ -85,9 +85,10 @@ public class CreditDAO {
 		int re=0;
 		try {
 			conn = AdminDAO.getConnection();
-			ResultSet rs = conn.createStatement().executeQuery("DELETE FROM credit WHERE id='" + obj.getId()+ "'" );
-			if (rs.next())
-				re = 1;
+			PreparedStatement pstm = conn.prepareStatement("DELETE FROM credit WHERE id=?");
+			pstm.setInt(1, obj.getId());	
+			pstm.executeUpdate();
+			
 
 		} catch (Exception e) {
 			System.out.println("erroe to delete credit " + e);

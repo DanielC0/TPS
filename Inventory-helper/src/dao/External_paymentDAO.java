@@ -66,10 +66,10 @@ public class External_paymentDAO {
 		try {
 			conn = AdminDAO.getConnection();
 			PreparedStatement prepatest = conn.prepareStatement("UPDATE external_payment SET description=?, price_total=?, movement=? WHERE id=?");
-			prepatest.setInt(1,obj.getId());
-			prepatest.setString(2,obj.getDescription());
-			prepatest.setDouble(3,obj.getPrice_total());
-			prepatest.setInt(4,obj.getMovement());
+			prepatest.setInt(4,obj.getId());
+			prepatest.setString(1,obj.getDescription());
+			prepatest.setDouble(2,obj.getPrice_total());
+			prepatest.setInt(3,obj.getMovement());
 			registro = prepatest.executeUpdate();
 			if(registro > 0) {
 				System.out.println(" external_payment update successfully");
@@ -88,9 +88,9 @@ public class External_paymentDAO {
 		int re=0;
 		try {
 			conn = AdminDAO.getConnection();
-			ResultSet rs = conn.createStatement().executeQuery("DELETE FROM external_payment WHERE id='" + obj.getId()+ "'" );
-			if (rs.next())
-				re = 1;
+			PreparedStatement pstm = conn.prepareStatement("DELETE FROM external_payment WHERE id=?" );
+			pstm.setInt(1, obj.getId());	
+			pstm.executeUpdate();
 
 		} catch (Exception e) {
 			System.out.println("erroe to delete external_payment " + e);

@@ -67,11 +67,11 @@ public class DealingDAO {
 		try {
 			conn = AdminDAO.getConnection();
 			PreparedStatement prepatest = conn.prepareStatement("UPDATE dealing SET product=?, quantity=?, unit_price=?, movement=? WHERE id=?");
-			prepatest.setInt(1,obj.getId());
-			prepatest.setInt(2,obj.getProduct());
-			prepatest.setDouble(3,obj.getQuantity());
-			prepatest.setDouble(4,obj.getUnit_price());
-			prepatest.setInt(5,obj.getMovement());
+			prepatest.setInt(5,obj.getId());
+			prepatest.setInt(1,obj.getProduct());
+			prepatest.setDouble(2,obj.getQuantity());
+			prepatest.setDouble(3,obj.getUnit_price());
+			prepatest.setInt(4,obj.getMovement());
 			registro = prepatest.executeUpdate();
 			if(registro > 0) {
 				System.out.println(" dealing update successfully");
@@ -90,9 +90,9 @@ public class DealingDAO {
 		int re=0;
 		try {
 			conn = AdminDAO.getConnection();
-			ResultSet rs = conn.createStatement().executeQuery("DELETE FROM dealing WHERE id='" + obj.getId()+ "'" );
-			if (rs.next())
-				re = 1;
+			PreparedStatement pstm = conn.prepareStatement("DELETE FROM dealing WHERE id=?" );
+			pstm.setInt(1, obj.getId());	
+			pstm.executeUpdate();
 
 		} catch (Exception e) {
 			System.out.println("erroe to delete dealing " + e);

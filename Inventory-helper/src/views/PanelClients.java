@@ -5,8 +5,15 @@
  */
 package views;
  
+import java.util.ArrayList;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+
+import dao.AdminDAO;
+import objs.Category;
+import uistyle.WDefaultTableModel;
 
 /**
  *

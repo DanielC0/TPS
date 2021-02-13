@@ -66,10 +66,10 @@ public class MovementDAO {
 		try {
 			conn = AdminDAO.getConnection();
 			PreparedStatement prepatest = conn.prepareStatement("UPDATE movement SET kind=?, price_total=?, moment=? WHERE id=?");
-			prepatest.setInt(1,obj.getId());
-			prepatest.setString(2,obj.getKind());
-			prepatest.setDouble(3,obj.getPrice_total());
-			prepatest.setDate(4,tools.Utils.dateUtlToSql( obj.getMoment()));
+			prepatest.setInt(4,obj.getId());
+			prepatest.setString(1,obj.getKind());
+			prepatest.setDouble(2,obj.getPrice_total());
+			prepatest.setDate(3,tools.Utils.dateUtlToSql( obj.getMoment()));
 			registro = prepatest.executeUpdate();
 			if(registro > 0) {
 				System.out.println(" movement update successfully");
@@ -88,9 +88,9 @@ public class MovementDAO {
 		int re=0;
 		try {
 			conn = AdminDAO.getConnection();
-			ResultSet rs = conn.createStatement().executeQuery("DELETE FROM movement WHERE id='" + obj.getId()+ "'" );
-			if (rs.next())
-				re = 1;
+			PreparedStatement pstm = conn.prepareStatement("DELETE FROM movement WHERE id=?" );
+			pstm.setInt(1, obj.getId());	
+			pstm.executeUpdate();
 
 		} catch (Exception e) {
 			System.out.println("erroe to delete movement " + e);

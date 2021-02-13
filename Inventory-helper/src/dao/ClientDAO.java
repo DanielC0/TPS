@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import objs.Category;
 import objs.Client;
 
 public class ClientDAO {
@@ -55,6 +56,9 @@ public class ClientDAO {
 		}
 		return allobjts;
 	}
+	public static ArrayList<Client> read(){
+		return ClientDAO.read("");
+	}
 
 	/*UPDATE*/
 	public static int update(Client obj){
@@ -63,10 +67,10 @@ public class ClientDAO {
 		try {
 			conn = AdminDAO.getConnection();
 			PreparedStatement prepatest = conn.prepareStatement("UPDATE client SET name=?, phone=?, address=? WHERE cc=?");
-			prepatest.setInt(1,obj.getCc());
-			prepatest.setString(2,obj.getName());
-			prepatest.setInt(3,obj.getPhone());
-			prepatest.setString(4,obj.getAddress());
+			prepatest.setInt(4,obj.getCc());
+			prepatest.setString(1,obj.getName());
+			prepatest.setInt(2,obj.getPhone());
+			prepatest.setString(3,obj.getAddress());
 			registro = prepatest.executeUpdate();
 			if(registro > 0) {
 				System.out.println(" client update successfully");
@@ -85,9 +89,10 @@ public class ClientDAO {
 		int re=0;
 		try {
 			conn = AdminDAO.getConnection();
-			ResultSet rs = conn.createStatement().executeQuery("DELETE FROM client WHERE cc='" + obj.getCc()+ "'" );
-			if (rs.next())
-				re = 1;
+			PreparedStatement pstm = conn.prepareStatement("DELETE FROM client WHERE cc= ? " );
+			pstm.setInt(1, obj.getCc());	
+			pstm.executeUpdate();
+			
 
 		} catch (Exception e) {
 			System.out.println("erroe to delete client " + e);
