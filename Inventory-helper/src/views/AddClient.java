@@ -155,7 +155,7 @@ public class AddClient extends javax.swing.JFrame {
 						JOptionPane.showMessageDialog(this, "Registrado con exito");
 						
 				}else {
-					JOptionPane.showMessageDialog(null, "Los campos de nombre y cedula deben de estar diligenciado y con m�s de 3 caracteres, Registrelo otra vez ;)","No se ha podido guardar",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Los campos de nombre y cedula deben de estar diligenciado y con mas de 3 caracteres, Registrelo otra vez ;)","No se ha podido guardar",JOptionPane.ERROR_MESSAGE);
 				
 				}
 		pnl.getData();

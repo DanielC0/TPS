@@ -173,9 +173,11 @@ public class Window extends javax.swing.JFrame {
         panelWindow.addTab("Caja", panelHome);
         panelWindow.setSelectedComponent(panelHome);
         panelHome.getData();
+        panelHome.updateComboBox();
         }else{
             panelWindow.setSelectedComponent(panelHome);
             panelHome.getData();
+            panelHome.updateComboBox();
         }
         vpHome="1";
     } 

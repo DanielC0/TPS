@@ -206,7 +206,6 @@ public class PanelClients extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDeleteClientActionPerformed
 
     private void btnAddClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddClientActionPerformed
-        // TODO add your handling code here:
         
         new AddClient().pnl=this;
         

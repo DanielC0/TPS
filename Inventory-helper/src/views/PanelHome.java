@@ -170,8 +170,7 @@ public class PanelHome extends javax.swing.JPanel {
 
         panelCenter.add(panelTitleClient);
         
-        
-        updateComboBox();
+        System.out.println("create");
         
         JLabel lblNewLabel = new JLabel("Seleccione un cliente:");
         
@@ -180,13 +179,12 @@ public class PanelHome extends javax.swing.JPanel {
         JButton btnAddClient = new JButton("Registrar");
         btnAddClient.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		
-        		new AddClient();
-        		
-        		
+        		showNewClient();
         	}
         });
-
+        
+        comboBoxClientsRegistered = new JComboBox<String>();
+//        this.updateComboBox();
         javax.swing.GroupLayout panelDataClientLayout = new javax.swing.GroupLayout(panelDataClient);
         panelDataClientLayout.setHorizontalGroup(
         	panelDataClientLayout.createParallelGroup(Alignment.LEADING)
@@ -335,7 +333,7 @@ public class PanelHome extends javax.swing.JPanel {
     private javax.swing.JTextField txtQuantity;
     // End of variables declaration//GEN-END:variables
     ArrayList<Client> clients = null;
-    JComboBox comboBoxClientsRegistered = new JComboBox<>();
+    JComboBox<String> comboBoxClientsRegistered =null;
     /////////////////////////////////BACKEND /////////////////////////////////
     /***
 	 * Update the category table 
@@ -390,11 +388,17 @@ public class PanelHome extends javax.swing.JPanel {
 	public void updateComboBox(){
 		comboBoxClientsRegistered.removeAllItems();
         comboBoxClientsRegistered.addItem("---");
+        comboBoxClientsRegistered.repaint();
     	clients = ClientDAO.read();
         AdminDAO.closeConnection();
         for (int i = 0; i < clients.size(); i++) {
-        	System.out.println("entra al for " + i);
+        	System.out.println("entra al for " + i + clients.get(i).getCc());
         	comboBoxClientsRegistered.addItem(clients.get(i).getCc() + " - "+ clients.get(i).getName());
 		}
+        
     }
+	
+	private void showNewClient() {
+		new AddClient().combx = this;
+	}
 }
