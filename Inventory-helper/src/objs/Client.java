@@ -9,13 +9,13 @@ import java.util.ArrayList;
 );
 */
 public class Client {  
-	private int cc;
+	private String cc;
 	private String name;
-	private int phone;
+	private String phone;
 	private String address;
 
 	/* constructor*/
-	public Client(int cc, String name, int phone, String address ){ 
+	public Client(String cc, String name, String phone, String address ){ 
 		this.cc = cc;
 		this.name = name;
 		this.phone = phone;
@@ -24,11 +24,11 @@ public class Client {
 
 	/* GETTERS AND SETTERS */
 
-	public int getCc(){
+	public String getCc(){
 		return cc;
 	}
 
-	public void setCc(int cc ){
+	public void setCc(String cc ){
 		this.cc = cc;
 	}
 
@@ -40,11 +40,11 @@ public class Client {
 		this.name = name;
 	}
 
-	public int getPhone(){
+	public String getPhone(){
 		return phone;
 	}
 
-	public void setPhone(int phone ){
+	public void setPhone(String phone ){
 		this.phone = phone;
 	}
 
