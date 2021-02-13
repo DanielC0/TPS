@@ -176,7 +176,12 @@ public class PanelClients extends javax.swing.JPanel {
 
     private void btnModifyClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyClientActionPerformed
         // TODO add your handling code here:
-        new ModifyClient();
+    	
+
+		int rwselect = tableClients.getSelectedRow();
+		
+    	
+        new ModifyClient().pnl=this;
     }//GEN-LAST:event_btnModifyClientActionPerformed
 
     private void btnDeleteClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteClientActionPerformed
@@ -202,7 +207,6 @@ public class PanelClients extends javax.swing.JPanel {
     private javax.swing.JTable tableClients;
     // End of variables declaration//GEN-END:variables
     
-<<<<<<< HEAD
     //////////////////////////// BACKEND//////////////////////////////////
     
     public void getData() {
@@ -222,11 +226,5 @@ public class PanelClients extends javax.swing.JPanel {
 		
 	}
     
-    
-    
-    
-    
-=======
->>>>>>> d6ab632e29ec976ccd45277ef1e2143628ab3695
     
 }

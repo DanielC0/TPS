@@ -21,6 +21,11 @@ public class ModifyClient extends javax.swing.JFrame {
         this.setResizable(false);
         this.setVisible(true);
     }
+    
+    public ModifyClient(String cc, String name, String phone, String adress){
+    	
+    	
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -132,19 +137,14 @@ public class ModifyClient extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    PanelClients pnl = new PanelClients();
     private void btnModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyActionPerformed
-        // TODO add your handling code here:
-        /*clienteDAO con = new clienteDAO();
-        con.conectar();
         
-        int cedula = Integer.valueOf(txtCedula.getText());
-        String nombre = txtNombre.getText();
-        int telefono = Integer.valueOf(txtTelefono.getText());
-        String direccion = txtDireccion.getText();
-        
-        con.Modificar(cedula, nombre, telefono, direccion);
-        
-        */
+
+    	
+    	
+    	
+    	
         this.dispose();
     }//GEN-LAST:event_btnModifyActionPerformed
 
@@ -182,38 +182,7 @@ public class ModifyClient extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ModifyClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
