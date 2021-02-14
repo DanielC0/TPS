@@ -146,9 +146,42 @@ public class ComprarProducto extends JPanel {
 		panel_1.add(lblPrecioDeCompra);
 
 		txfUnitPrice = new WJTextFieldNumber("0");
+		txfUnitPrice.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (!tools.Utils.noempryString(txfUnitPrice.getText(), 1)) {
+					// no pasa la validación 
+					if (tools.Utils.noempryString(txfPuncharsePrice.getText(), 1) && 
+							tools.Utils.noempryString(txfNewQuantity.getText(), 1) 
+							) {
+						// calculate
+						double cant = Double.valueOf(txfNewQuantity.getText());
+						double priceU = Double.valueOf(txfPuncharsePrice.getText());
+						if (cant != 0) {
+							txfUnitPrice.setText(String.valueOf((Double) priceU / cant));
+						}else {
+							txfUnitPrice.setText("0");
+						}
+						
+					}else {
+						txfPuncharsePrice.setText("0");
+					}
+				}else {
+					// calculate the puncharse price
+					double cant = Double.valueOf(txfNewQuantity.getText());
+					double priceP = Double.valueOf(txfUnitPrice.getText());
+					if(cant != 0 ) {
+						txfPuncharsePrice.setText(String.valueOf((Double)(priceP * cant)));
+					}else {
+						txfPuncharsePrice.setText("0");
+					}
+					
+				}
+			}
+		});
 		txfUnitPrice.setColumns(10);
-		txfUnitPrice.setEditable(false);
-		txfUnitPrice.setFocusable(false);
+//		txfUnitPrice.setEditable(false);
+//		txfUnitPrice.setFocusable(false);
 		panel_1.add(txfUnitPrice);
 
 		JLabel lblFechaDeCompra = new JLabel("Fecha de compra");
