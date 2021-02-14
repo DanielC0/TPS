@@ -1,14 +1,9 @@
 package views2;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.FlowLayout;
 
 public class Apc {
 
@@ -20,16 +15,10 @@ public class Apc {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Apc window = new Apc();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		java.util.Hashtable<String, Integer> diccionario = new java.util.Hashtable<String, Integer>();
+		diccionario.put("mangos", 2);
+		diccionario.put("mangos", 4);
+		System.out.println(diccionario.size());
 	}
 
 	/**
