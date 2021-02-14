@@ -325,6 +325,7 @@ public class PanelHome extends javax.swing.JPanel {
         });
         
         btnAddCredit = new JButton();
+        btnAddCredit.setVisible(false);
         btnAddCredit.setText("Registrar Credito");
         btnAddCredit.setPreferredSize(new Dimension(362, 32));
         btnAddCredit.setMinimumSize(new Dimension(362, 32));
@@ -373,6 +374,7 @@ public class PanelHome extends javax.swing.JPanel {
 			modeltbOrder = new WDefaultTableModel(
 					new String [] {"id","Nombre","cantidad" ,"Precio unitario",}); 
 			tableOrder.setModel(modeltbOrder);
+			JOptionPane.showMessageDialog(null, "Transaccio completada con exito", "Exito",JOptionPane.INFORMATION_MESSAGE);
     	}else {
     		JOptionPane.showMessageDialog(null, "El pedido está vacio");
     	}
