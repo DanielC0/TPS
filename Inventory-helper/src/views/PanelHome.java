@@ -19,9 +19,11 @@ import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -58,21 +60,37 @@ public class PanelHome extends javax.swing.JPanel {
 
 
 		WDefaultTableModel modeltb = new WDefaultTableModel(
-				new String [] {"Nombre","cantidad" ,"Precio unitario",});
+				new String [] {"id","Nombre","cantidad" ,"Precio unitario",});
         btnAddSelectedProduct.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e) {
         		int rwselect = tableStock.getSelectedRow();
-        		if(rwselect >= 0){
-        			
+        		 
+        		if(Double.valueOf(txtQuantity.getText()) <= Double.valueOf(tableStock.getValueAt(rwselect,2).toString())) {
+        			if(rwselect >= 0 && tools.Utils.noempryString(txtQuantity.getText(), 1)){
+            			
+           			 
+            			modeltb.addRow(new Object[] {tableStock.getValueAt(rwselect,0).toString(),tableStock.getValueAt(rwselect,1).toString(), txtQuantity.getText(), 
+            										(Double.valueOf(tableStock.getValueAt(rwselect, 3).toString())
+            												*(Double.valueOf(txtQuantity.getText()))) });
+            			
+            			 
+            		}else {
+            			JOptionPane.showMessageDialog(null, "Seleccione un producto para agregar e ingrese la cantidad");
+            		}
         			 
-        			modeltb.addRow(new Object[] {tableStock.getValueAt(rwselect,0).toString(), txtQuantity.getText(), 
-        										(Double.valueOf(tableStock.getValueAt(rwselect, 2).toString())
-        												*(Double.valueOf(txtQuantity.getText()))) });
-        			
-        			 
+        		}else {
+        			JOptionPane.showMessageDialog(null, "No hay tanto de ese producto");
         		}
+        		
         		tableOrder.setModel(modeltb);
         		txtQuantity.setText("");
+        		double totalAmount = 0; 
+        		for(int i = 0; i< tableOrder.getRowCount() ; i++) {
+        			totalAmount += Double.valueOf(tableOrder.getValueAt(i, 3).toString());
+        		}
+        		
+        		labelTotalAmount.setText(""+totalAmount);
+        		
         		
         	}
         });
@@ -215,56 +233,15 @@ public class PanelHome extends javax.swing.JPanel {
 
         panelRight.setLayout(new javax.swing.BoxLayout(panelRight, javax.swing.BoxLayout.Y_AXIS));
 
-        tableOrder.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Nombre", "Cantidad", "Precio"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        tableOrder.setModel(new DefaultTableModel(
+        	new Object[][] {
+        		{null, null, null, null}
+        		
+        	},
+        	new String[] {
+        		"id", "Nombre", "Cantidad", "Precio"
+        	}
+        ));
         scrollPaneOrder.setViewportView(tableOrder);
         if (tableOrder.getColumnModel().getColumnCount() > 0) {
             tableOrder.getColumnModel().getColumn(0).setResizable(false);
@@ -341,7 +318,7 @@ public class PanelHome extends javax.swing.JPanel {
 		System.out.println("aaaaaaaaaa getdata ");
 		// lod table model
 		WDefaultTableModel modeltb = new WDefaultTableModel(
-				new String [] {"Nombre","cantidad", "Precio"});
+				new String [] {"id","Nombre","cantidad", "Precio"});
 		Connection conn = null;
 		try {
 			//get Connection
@@ -349,11 +326,11 @@ public class PanelHome extends javax.swing.JPanel {
 			//put sql
 			ResultSet rs =null;
 			rs = conn.createStatement().executeQuery(
-					"select name, stock, price from product"); 
+					"select id, name, stock, price from product"); 
 			
 			// load products
 			while (rs.next()) {
-				modeltb.addRow( new Object[] {rs.getString(1), rs.getDouble(2), rs.getDouble(3)});
+				modeltb.addRow( new Object[] {rs.getInt(1),rs.getString(2), rs.getDouble(3), rs.getDouble(4)});
 			}
 			AdminDAO.closeConnection();
 		} catch (Exception e) {
