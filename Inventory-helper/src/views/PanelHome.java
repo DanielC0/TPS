@@ -64,23 +64,40 @@ public class PanelHome extends javax.swing.JPanel {
         btnAddSelectedProduct.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e) {
         		int rwselect = tableStock.getSelectedRow();
-        		 
-        		if(Double.valueOf(txtQuantity.getText()) <= Double.valueOf(tableStock.getValueAt(rwselect,2).toString())) {
-        			if(rwselect >= 0 && tools.Utils.noempryString(txtQuantity.getText(), 1)){
-            			
-           			 
-            			modeltb.addRow(new Object[] {tableStock.getValueAt(rwselect,0).toString(),tableStock.getValueAt(rwselect,1).toString(), txtQuantity.getText(), 
-            										(Double.valueOf(tableStock.getValueAt(rwselect, 3).toString())
-            												*(Double.valueOf(txtQuantity.getText()))) });
-            			
-            			 
-            		}else {
-            			JOptionPane.showMessageDialog(null, "Seleccione un producto para agregar e ingrese la cantidad");
-            		}
-        			 
+        		
+        		if(rwselect >= 0 && tools.Utils.noempryString(txtQuantity.getText(), 1)){
+        			double cantidad = Double.valueOf(txtQuantity.getText());
+        			double cantLimite = Double.valueOf(tableStock.getValueAt(rwselect,2).toString());
+        			String idProd = tableStock.getValueAt(rwselect, 0).toString();
+        			
+        			// if product is insert prev 
+        			if(diccionarioFactura.get(idProd) != null ) {
+        				if((cantidad + diccionarioFactura.get(idProd)) <= cantLimite  ) {
+        					
+        					modeltb.addRow(new Object[] {tableStock.getValueAt(rwselect,0).toString(),tableStock.getValueAt(rwselect,1).toString(), txtQuantity.getText(), 
+    								(Double.valueOf(tableStock.getValueAt(rwselect, 3).toString())
+    										*(Double.valueOf(txtQuantity.getText()))) });
+        					
+            				diccionarioFactura.put(idProd, (cantidad + diccionarioFactura.get(idProd)));
+        				}else {
+        					JOptionPane.showMessageDialog(null, 
+        							"No hay tanto de ese producto \n intenta agregar " + (cantidad + diccionarioFactura.get(idProd)) + 
+        							", pero solo hay "+ cantLimite ,"Error", JOptionPane.ERROR_MESSAGE);
+        				}
+        			}else {
+        			// is new prod on order
+        				diccionarioFactura.put(idProd, cantidad);
+        				
+        				modeltb.addRow(new Object[] {tableStock.getValueAt(rwselect,0).toString(),tableStock.getValueAt(rwselect,1).toString(), txtQuantity.getText(), 
+								(Double.valueOf(tableStock.getValueAt(rwselect, 3).toString())
+										*(Double.valueOf(txtQuantity.getText()))) });
+    					
+        			}
+        			
         		}else {
-        			JOptionPane.showMessageDialog(null, "No hay tanto de ese producto");
+        			JOptionPane.showMessageDialog(null, "Seleccione un producto para agregar e ingrese la cantidad");
         		}
+        		
         		
         		tableOrder.setModel(modeltb);
         		txtQuantity.setText("");
@@ -145,32 +162,51 @@ public class PanelHome extends javax.swing.JPanel {
         labelQuantity.setText("Cantidad:");
 
         btnAddSelectedProduct.setText("Agregar producto seleccionado");
+        
+        JButton btnRemoveOrder = new JButton();
+        btnRemoveOrder.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		int rwS = tableOrder.getSelectedRow();
+        		if (rwS >= 0) {
+        			diccionarioFactura.remove(tableOrder.getValueAt(rwS,0).toString());
+        			modeltb.removeRow(rwS);
+        			tableOrder.setModel(modeltb);
+
+        		}else {
+        			JOptionPane.showMessageDialog(null, "Debe seleccionar un registro para remover","Alerta",JOptionPane.WARNING_MESSAGE);
+        		}
+        	}
+        });
+        btnRemoveOrder.setText("Remover la compra ");
 
         javax.swing.GroupLayout panelAddProductsLayout = new javax.swing.GroupLayout(panelAddProducts);
-        panelAddProducts.setLayout(panelAddProductsLayout);
         panelAddProductsLayout.setHorizontalGroup(
-            panelAddProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAddProductsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelAddProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelAddProductsLayout.createSequentialGroup()
-                        .addComponent(labelQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtQuantity))
-                    .addComponent(btnAddSelectedProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE))
-                .addContainerGap())
+        	panelAddProductsLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(panelAddProductsLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(panelAddProductsLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(panelAddProductsLayout.createSequentialGroup()
+        					.addComponent(labelQuantity, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(txtQuantity, 147, 147, 147))
+        				.addComponent(btnAddSelectedProduct, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        				.addComponent(btnRemoveOrder, GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
+        			.addGap(10))
         );
         panelAddProductsLayout.setVerticalGroup(
-            panelAddProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAddProductsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelAddProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAddSelectedProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        	panelAddProductsLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(panelAddProductsLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(panelAddProductsLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(labelQuantity, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(txtQuantity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(btnAddSelectedProduct, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(btnRemoveOrder, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        			.addGap(0, 0, Short.MAX_VALUE))
         );
+        panelAddProducts.setLayout(panelAddProductsLayout);
 
         panelCenter.add(panelAddProducts);
 
@@ -306,6 +342,8 @@ public class PanelHome extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     ArrayList<Client> clients = null;
     JComboBox<String> comboBoxClientsRegistered =null;
+    java.util.Hashtable<String, Double> diccionarioFactura = new java.util.Hashtable<String, Double>();
+    
     /////////////////////////////////BACKEND /////////////////////////////////
     /***
 	 * Update the category table 
