@@ -156,6 +156,7 @@ public class ComprarProducto extends JPanel {
 							) {
 						// calculate
 						double cant = Double.valueOf(txfNewQuantity.getText());
+				
 						double priceU = Double.valueOf(txfPuncharsePrice.getText());
 						if (cant != 0) {
 							txfUnitPrice.setText(String.valueOf((Double) priceU / cant));
