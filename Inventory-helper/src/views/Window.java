@@ -219,17 +219,19 @@ public class Window extends javax.swing.JFrame {
         }
         vpCredits="1";
     }
-    views.PanelMovement panelDealings;
-    public String vpDealings="0";
-    public void openDealings(){ 
-        if(vpDealings=="0"){
-            panelDealings = new views.PanelMovement();
-            panelWindow.addTab("Transacciones", panelDealings);
-            panelWindow.setSelectedComponent(panelDealings);
+    views.PanelMovement panelMovements;
+    public String vpMovements="0";
+    public void openMovement(){ 
+        if(vpMovements=="0"){
+            panelMovements = new views.PanelMovement();
+            panelWindow.addTab("Transacciones", panelMovements);
+            panelWindow.setSelectedComponent(panelMovements);
+            panelMovements.getData();
         }else{
-            panelWindow.setSelectedComponent(panelDealings);
+            panelWindow.setSelectedComponent(panelMovements);
+            panelMovements.getData();
         }
-        vpDealings="1";
+        vpMovements="1";
     } 
     
     views.PanelSettings panelSettings;
@@ -300,7 +302,7 @@ public class Window extends javax.swing.JFrame {
 
     private void btnMovementsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovementsActionPerformed
         // TODO add your handling code here:
-        openDealings();
+        openMovement();
     }//GEN-LAST:event_btnMovementsActionPerformed
 
     /**

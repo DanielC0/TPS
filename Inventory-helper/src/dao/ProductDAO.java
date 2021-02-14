@@ -107,6 +107,28 @@ public class ProductDAO {
 		return registro;
 	}
 
+	/*special update*/
+	public static int update(int id, double newQuant){
+		Connection conn = null;
+		int registro =0;
+		try {
+			conn = AdminDAO.getConnection();
+			PreparedStatement prepatest = conn.prepareStatement("UPDATE product SET stock=? WHERE id=?");
+			
+			prepatest.setDouble(1,newQuant);
+			prepatest.setInt(2,id);
+			
+			registro = prepatest.executeUpdate();
+			if(registro > 0) {
+				System.out.println(" product update successfully");
+			}
+		} catch (Exception e) {
+			System.out.println("error to update product" + e);
+			e.printStackTrace();
+		}
+		return registro;
+	}
+
 
 	/*DELETE*/
 	public static int delete(Product obj){
