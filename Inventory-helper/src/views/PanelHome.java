@@ -55,24 +55,24 @@ public class PanelHome extends javax.swing.JPanel {
         labelQuantity = new javax.swing.JLabel();
         txtQuantity = new javax.swing.JTextField();
         btnAddSelectedProduct = new javax.swing.JButton();
-        
+
+
+		WDefaultTableModel modeltb = new WDefaultTableModel(
+				new String [] {"Nombre","cantidad" ,"Precio unitario",});
         btnAddSelectedProduct.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e) {
-        		
-        		/*int rwselect = tableStock.getSelectedRow();
-    			WDefaultTableModel modeltb = new WDefaultTableModel(
-    					new String [] {"Nombre","cantidad" ,"Precio unitario",});
+        		int rwselect = tableStock.getSelectedRow();
         		if(rwselect >= 0){
         			
-        			
+        			 
         			modeltb.addRow(new Object[] {tableStock.getValueAt(rwselect,0).toString(), txtQuantity.getText(), 
-        										(Double.valueOf(tableOrder.getValueAt(rwselect, 2).toString())*(Double.valueOf(txtQuantity.getText()))) });
+        										(Double.valueOf(tableStock.getValueAt(rwselect, 2).toString())
+        												*(Double.valueOf(txtQuantity.getText()))) });
         			
-        			
-        			
+        			 
         		}
         		tableOrder.setModel(modeltb);
-        		*/
+        		txtQuantity.setText("");
         		
         	}
         });
@@ -362,22 +362,7 @@ public class PanelHome extends javax.swing.JPanel {
 		}
 		
 		tableStock.setModel(modeltb);
-//		tableStock.setModel(new DefaultTableModel(
-//			new Object[][] {
-//				{null, null, null},
-//			},
-//			new String[] {
-//				"Nombre", "cantidad", "Precio unitario"
-//			}
-//		) {
-//			Class[] columnTypes = new Class[] {
-//				Object.class, Object.class, String.class
-//			};
-//			public Class getColumnClass(int columnIndex) {
-//				return columnTypes[columnIndex];
-//			}
-//		});
-		 
+
 	}
 	
 	public void updateComboBox(){
