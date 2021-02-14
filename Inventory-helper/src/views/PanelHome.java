@@ -177,7 +177,7 @@ public class PanelHome extends javax.swing.JPanel {
         		}
         	}
         });
-        btnRemoveOrder.setText("Remover la compra ");
+        btnRemoveOrder.setText("Remover producto de la compra ");
 
         javax.swing.GroupLayout panelAddProductsLayout = new javax.swing.GroupLayout(panelAddProducts);
         panelAddProductsLayout.setHorizontalGroup(
@@ -308,6 +308,13 @@ public class PanelHome extends javax.swing.JPanel {
                 btnRegisterSaleActionPerformed(evt);
             }
         });
+        
+        btnAddCredit = new JButton();
+        btnAddCredit.setText("Registrar Credito");
+        btnAddCredit.setPreferredSize(new Dimension(362, 32));
+        btnAddCredit.setMinimumSize(new Dimension(362, 32));
+        btnAddCredit.setMaximumSize(new Dimension(362, 32));
+        panelRight.add(btnAddCredit);
         panelRight.add(btnRegisterSale);
 
         add(panelRight);
@@ -343,6 +350,7 @@ public class PanelHome extends javax.swing.JPanel {
     ArrayList<Client> clients = null;
     JComboBox<String> comboBoxClientsRegistered =null;
     java.util.Hashtable<String, Double> diccionarioFactura = new java.util.Hashtable<String, Double>();
+    private JButton btnAddCredit;
     
     /////////////////////////////////BACKEND /////////////////////////////////
     /***
