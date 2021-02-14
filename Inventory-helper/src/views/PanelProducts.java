@@ -188,6 +188,8 @@ public class PanelProducts extends javax.swing.JPanel {
         			Double.valueOf(tableProducts.getValueAt(rwSelect, 5).toString()), 
         			Integer.valueOf(tableProducts.getValueAt(rwSelect, 6).toString()));
     		ptmp.categoryname = tableProducts.getValueAt(rwSelect, 7).toString();
+    		System.out.println(Double.valueOf(tableProducts.getValueAt(rwSelect, 4).toString()));
+    		System.out.println(ptmp.toString());
 //    		Product prd = new Product(id, name, stock, desc, cpp, price, catid);
 //    		System.out.println(tableProducts.getValueAt(rwSelect, 0));
 //    		Product prd = new Product((Integer)tableProducts.getValueAt(rwSelect, 1),"", 0, "", 0, 0, 1);

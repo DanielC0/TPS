@@ -46,7 +46,7 @@ public class ModifyProduct extends javax.swing.JFrame {
         
         txtDescription.setText(prInt.getDescription());
         txtName.setText(prInt.getName());
-        txtPurchasePrice.setText(String.valueOf( prInt.getPrice()));
+        txtPurchasePrice.setText(String.valueOf( prInt.getCpp()));
         txtId.setText(String.valueOf(prInt.getId()));
         txtQuantity.setText(String.valueOf(prInt.getStock()));
         txtSalePrice.setText(String.valueOf(prInt.getPrice()));
