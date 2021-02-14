@@ -314,7 +314,19 @@ public class PanelHome extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegisterSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterSaleActionPerformed
-        // TODO add your handling code here:
+    	/*
+    	 * asdfñlasdfs
+    	 * fds
+    	 * 
+    	 * fa
+    	 * sdf
+    	 * asd
+    	 * fasd
+    	 * 
+    	 * fa
+    	 * sdf
+    	 * 
+    	 * */
     }//GEN-LAST:event_btnRegisterSaleActionPerformed
     
 
